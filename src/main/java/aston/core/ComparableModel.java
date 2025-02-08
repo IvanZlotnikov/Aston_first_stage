@@ -2,5 +2,5 @@ package aston.core;
 
 public interface ComparableModel<T> {
 
-    int compareTo(T target);
+    int compareToFromProject(T target);
 }

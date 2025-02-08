@@ -1,7 +1,6 @@
 package aston.utils;
 
 import aston.core.ComparableModel;
-import aston.model.Bus;
 
 import java.util.Arrays;
 

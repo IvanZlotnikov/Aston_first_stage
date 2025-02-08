@@ -5,7 +5,6 @@ import aston.core.ComparableModel;
 import aston.core.Sortable;
 import aston.utils.UtilsToProject;
 
-import java.util.Arrays;
 
 public class Bus implements ComparableModel<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
 

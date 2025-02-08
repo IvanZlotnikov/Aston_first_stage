@@ -5,7 +5,6 @@ import aston.core.ComparableModel;
 import aston.core.Sortable;
 import aston.utils.UtilsToProject;
 
-import java.util.Arrays;
 
 public class User implements ComparableModel<User>, Sortable<User>, BinarySearchable<User> {
     private final String name;

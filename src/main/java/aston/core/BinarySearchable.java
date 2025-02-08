@@ -3,6 +3,6 @@ package aston.core;
 //для реализации алгоритмов бинарного поиска
 public interface BinarySearchable<T> {
 
-    int binarySearch(T[] array, T key);
+    int binarySearch(T[] array, T target);
 
 }

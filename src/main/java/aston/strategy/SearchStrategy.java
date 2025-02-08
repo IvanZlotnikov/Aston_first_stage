@@ -1,4 +1,6 @@
 package aston.strategy;
 
-public class SearchStrategy {
+public interface SearchStrategy<T> {
+    
+    public int binarySearch(T[] array, T key);
 }

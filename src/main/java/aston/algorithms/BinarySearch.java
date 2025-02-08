@@ -1,9 +1,9 @@
 package aston.algorithms;
 
-import aston.core.BinarySearchable;
+import aston.strategy.SearchStrategy;
 
 //для бинарного поиска
-public class BinarySearch<T> implements BinarySearchable<T> {
+public class BinarySearch<T> implements SearchStrategy<T> {
 
     @Override
     public int binarySearch(T[] array, T key) {

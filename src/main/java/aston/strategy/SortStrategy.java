@@ -1,4 +1,6 @@
 package aston.strategy;
 
-public class SortStrategy {
+public interface SortStrategy<T> {
+    
+    public void sort(T[] array);
 }

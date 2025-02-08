@@ -1,7 +1,5 @@
 package aston.core;
 
-// groupNumber, averageScore, recordBookNumber
-
 class Student {
     private final String groupNumber;
     private final double averageScore;

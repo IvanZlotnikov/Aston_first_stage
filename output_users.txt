@@ -1,0 +1,9 @@
+User{name='User1', password='password1', email='user1@gmail.com'}
+User{name='User2', password='password2', email='user2@gmail.com'}
+User{name='User3', password='password3', email='user3@gmail.com'}
+User{name='User1', password='password1', email='user1@gmail.com'}
+User{name='User2', password='password2', email='user2@gmail.com'}
+User{name='User3', password='password3', email='user3@gmail.com'}
+User{name='User1', password='password1', email='user1@gmail.com'}
+User{name='User2', password='password2', email='user2@gmail.com'}
+User{name='User3', password='password3', email='user3@gmail.com'}

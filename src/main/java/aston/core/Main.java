@@ -102,12 +102,10 @@ public class Main {
                         exit = true;
                     else
                         System.out.println("Неверный выбор попробуйте снова.");
-
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода : " + e.getMessage());
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Ошибка с BufferedReader: " + e.getMessage());
         }

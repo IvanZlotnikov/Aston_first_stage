@@ -1,12 +1,11 @@
 package aston.model;
 
 import aston.core.BinarySearchable;
-import aston.core.ComparableModel;
 import aston.core.Sortable;
 import aston.utils.UtilsToProject;
 
 
-public class User implements ComparableModel<User>, Sortable<User>, BinarySearchable<User> {
+public class User implements Comparable<User>, Sortable<User>, BinarySearchable<User> {
     private final String name;
     private final String password;
     private final String email;
@@ -63,7 +62,7 @@ public class User implements ComparableModel<User>, Sortable<User>, BinarySearch
         }
     }
     @Override
-    public int compareToFromProject(User target) {
+    public int compareTo(User target) {
         if (target == null)
             throw new IllegalArgumentException("target is null");
         return this.name.compareTo(target.name);

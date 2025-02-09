@@ -1,10 +1,9 @@
 package aston.algorithms;
 
 import aston.core.BinarySearchable;
-import aston.core.ComparableModel;
 
 //для бинарного поиска
-public class BinarySearch<T extends ComparableModel> implements BinarySearchable<T> {
+public class BinarySearch<T extends Comparable> implements BinarySearchable<T> {
 
     @Override
     public int binarySearch(T[] array, T target) {
@@ -17,9 +16,9 @@ public class BinarySearch<T extends ComparableModel> implements BinarySearchable
         int right = array.length - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            if (array[mid].compareToFromProject(target) < 0)
+            if (array[mid].compareTo(target) < 0)
                 left = mid + 1;
-            else if (array[mid].compareToFromProject(target) > 0)
+            else if (array[mid].compareTo(target) > 0)
                 right = mid - 1;
             else
                 return mid;

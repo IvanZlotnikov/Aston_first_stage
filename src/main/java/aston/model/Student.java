@@ -1,12 +1,11 @@
 package aston.model;
 
 import aston.core.BinarySearchable;
-import aston.core.ComparableModel;
 import aston.core.Sortable;
 import aston.utils.UtilsToProject;
 
 
-public class Student implements ComparableModel<Student>, Sortable<Student>, BinarySearchable<Student> {
+public class Student implements Comparable<Student>, Sortable<Student>, BinarySearchable<Student> {
 
     private final int groupNumber;
     private final double averageGrade;
@@ -40,7 +39,7 @@ public class Student implements ComparableModel<Student>, Sortable<Student>, Bin
     }
 
     @Override
-    public int compareToFromProject(Student target) {
+    public int compareTo(Student target) {
         if (target == null)
             throw new IllegalArgumentException("target is null");
         return Double.compare(this.averageGrade, target.averageGrade);

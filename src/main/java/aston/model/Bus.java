@@ -1,12 +1,11 @@
 package aston.model;
 
 import aston.core.BinarySearchable;
-import aston.core.ComparableModel;
 import aston.core.Sortable;
 import aston.utils.UtilsToProject;
 
 
-public class Bus implements ComparableModel<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
+public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
 
     private final String number;
     private final String model;
@@ -40,7 +39,7 @@ public class Bus implements ComparableModel<Bus>, Sortable<Bus>, BinarySearchabl
     }
 
     @Override
-    public int compareToFromProject(Bus target) {
+    public int compareTo(Bus target) {
         if (target == null)
             throw new IllegalArgumentException("target == null");
         return Integer.compare(this.mileage, target.mileage);

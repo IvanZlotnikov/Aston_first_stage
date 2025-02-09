@@ -1,0 +1,3 @@
+Bus{number='456', model='ModelB', mileage=1000}
+Bus{number='123', model='ModelA', mileage=1500}
+Bus{number='789', model='ModelC', mileage=2000}

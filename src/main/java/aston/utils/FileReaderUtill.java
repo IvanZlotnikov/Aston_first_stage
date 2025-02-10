@@ -21,7 +21,7 @@ public class FileReaderUtill {
                 index++;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         String[] res = new String[index];
         System.arraycopy(lines, 0, res, 0, index);

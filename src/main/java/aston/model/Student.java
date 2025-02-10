@@ -1,11 +1,11 @@
 package aston.model;
 
-import aston.core.BinarySearchable;
-import aston.core.Sortable;
 import aston.utils.UtilsToProject;
+import aston.strategy.SearchStrategy;
+import aston.strategy.SortStrategy;
 
 
-public class Student implements Comparable<Student>, Sortable<Student>, BinarySearchable<Student> {
+public class Student implements Comparable<Student>, SortStrategy<Student>, SearchStrategy<Student> {
 
     private final int groupNumber;
     private final double averageGrade;
@@ -46,7 +46,7 @@ public class Student implements Comparable<Student>, Sortable<Student>, BinarySe
     }
 
     @Override
-    public int binarySearch(Student[] array, Student target) {
+    public int searchFor(Student[] array, Student target) {
         return UtilsToProject.search(array, target);
     }
 

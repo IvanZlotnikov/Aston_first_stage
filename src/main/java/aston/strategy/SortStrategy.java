@@ -1,7 +1,7 @@
-package aston.core;
+package aston.strategy;
 
 //для реализации алгоритмов сортировки
-public interface Sortable<T> {
+public interface SortStrategy<T> {
 
     void sort(T[] array);
 }

@@ -1,10 +1,10 @@
 package aston.data;
 
-import aston.core.DataFiller;
 import aston.model.User;
 import aston.utils.FileReaderUtill;
+import aston.strategy.DataFillerStrategy;
 
-public class UserDataFiller implements DataFiller<User> {
+public class UserDataFiller implements DataFillerStrategy<User> {
     private String filePath;
 
     public UserDataFiller(String filePath) {

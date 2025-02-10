@@ -1,12 +1,13 @@
 package aston.core;
 
+import aston.strategy.DataFillerStrategy;
 import aston.data.BusDataFiller;
 import aston.data.StudentDataFiller;
 import aston.data.UserDataFiller;
 import aston.model.Bus;
 import aston.model.Student;
 import aston.model.User;
-import aston.strategy.SearchStrategy;
+import aston.utils.SearchAndSort;
 import aston.utils.DataValidator;
 import aston.utils.FileWriterUtill;
 
@@ -21,9 +22,9 @@ public class Main {
     private static int foundDataIndex = 0;
 
     public static void main(String[] args) {
-        DataFiller<Bus> busFiller = new BusDataFiller("buses.txt");
-        DataFiller<User> userFiller = new UserDataFiller("users.txt");
-        DataFiller<Student> studentFiller = new StudentDataFiller("students.txt");
+        DataFillerStrategy<Bus> busFiller = new BusDataFiller("buses.txt");
+        DataFillerStrategy<User> userFiller = new UserDataFiller("users.txt");
+        DataFillerStrategy<Student> studentFiller = new StudentDataFiller("students.txt");
 
         Bus[] buses = busFiller.fillData();
         User[] users = userFiller.fillData();
@@ -49,7 +50,7 @@ public class Main {
                     System.out.println("Введите пробег для поиска: ");
                     int mileage = Integer.parseInt(br.readLine());
                     Bus busTarget = new Bus.Builder().setMileage(mileage).build();
-                    SearchStrategy<Bus> busSearch = new SearchStrategy<>(buses, busTarget,foundData,foundDataIndex);
+                    SearchAndSort<Bus> busSearch = new SearchAndSort<>(buses, busTarget,foundData,foundDataIndex);
                     busSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -60,7 +61,7 @@ public class Main {
                     System.out.println("Введите имя для поиска: ");
                     String name = br.readLine();
                     User userTarget = new User.Builder().setName(name).build();
-                    SearchStrategy<User> userSearch = new SearchStrategy<>(users, userTarget,foundData,foundDataIndex);
+                    SearchAndSort<User> userSearch = new SearchAndSort<>(users, userTarget,foundData,foundDataIndex);
                     userSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -71,7 +72,7 @@ public class Main {
                     System.out.println("Введите средний бал для поиска: ");
                     double averageGrade = Double.parseDouble(br.readLine());
                     Student studentTarget = new Student.Builder().setAverageGrade(averageGrade).build();
-                    SearchStrategy<Student> studentSearch = new SearchStrategy<>(students, studentTarget,foundData,foundDataIndex);
+                    SearchAndSort<Student> studentSearch = new SearchAndSort<>(students, studentTarget,foundData,foundDataIndex);
                     studentSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());

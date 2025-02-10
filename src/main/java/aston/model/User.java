@@ -1,11 +1,11 @@
 package aston.model;
 
-import aston.core.BinarySearchable;
-import aston.core.Sortable;
 import aston.utils.UtilsToProject;
+import aston.strategy.SearchStrategy;
+import aston.strategy.SortStrategy;
 
 
-public class User implements Comparable<User>, Sortable<User>, BinarySearchable<User> {
+public class User implements Comparable<User>, SortStrategy<User>, SearchStrategy<User> {
     private final String name;
     private final String password;
     private final String email;
@@ -68,7 +68,7 @@ public class User implements Comparable<User>, Sortable<User>, BinarySearchable<
         return this.name.compareToIgnoreCase(target.name);
     }
     @Override
-    public int binarySearch(User[] array, User target) {
+    public int searchFor(User[] array, User target) {
         return UtilsToProject.search(array, target);
     }
 

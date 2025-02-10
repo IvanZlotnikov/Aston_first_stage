@@ -1,11 +1,11 @@
 package aston.model;
 
-import aston.core.BinarySearchable;
-import aston.core.Sortable;
 import aston.utils.UtilsToProject;
+import aston.strategy.SearchStrategy;
+import aston.strategy.SortStrategy;
 
 
-public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
+public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<Bus> {
 
     private final int number;
     private final String model;
@@ -47,7 +47,7 @@ public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus
 
 
     @Override
-    public int binarySearch(Bus[] array, Bus target) {
+    public int searchFor(Bus[] array, Bus target) {
         return UtilsToProject.search(array, target);
     }
 

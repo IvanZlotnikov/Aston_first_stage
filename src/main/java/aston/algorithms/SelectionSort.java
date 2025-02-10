@@ -1,9 +1,9 @@
 package aston.algorithms;
 
-import aston.core.Sortable;
+import aston.strategy.SortStrategy;
 
 //для сортировки выбором
-public class SelectionSort<T extends Comparable> implements Sortable<T> {
+public class SelectionSort<T extends Comparable> implements SortStrategy<T> {
 
     @Override
     public void sort(T[] array) {

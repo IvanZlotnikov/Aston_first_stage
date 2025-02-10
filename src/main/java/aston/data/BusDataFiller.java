@@ -1,11 +1,11 @@
 package aston.data;
 
-import aston.core.DataFiller;
 import aston.model.Bus;
 import aston.utils.FileReaderUtill;
+import aston.strategy.DataFillerStrategy;
 
 
-public class BusDataFiller implements DataFiller<Bus> {
+public class BusDataFiller implements DataFillerStrategy<Bus> {
     private String filePath;
 
     public BusDataFiller(String filePath) {

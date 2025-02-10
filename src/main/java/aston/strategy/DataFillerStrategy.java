@@ -1,7 +1,7 @@
-package aston.core;
+package aston.strategy;
 
 //для заполнения данных.
-public interface DataFiller<T> {
+public interface DataFillerStrategy<T> {
 
     T[] fillData();
 

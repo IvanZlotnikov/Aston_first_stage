@@ -2,14 +2,27 @@ package aston.data;
 
 import aston.core.DataFiller;
 import aston.model.User;
+import aston.utils.FileReaderUtill;
 
 public class UserDataFiller implements DataFiller<User> {
+    private String filePath;
+
+    public UserDataFiller(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public User[] fillData() {
-        return new User[]{
-                new User.Builder().setName("User1").setPassword("password1").setEmail("user1@gmail.com").build(),
-                new User.Builder().setName("User2").setPassword("password2").setEmail("user2@gmail.com").build(),
-                new User.Builder().setName("User3").setPassword("password3").setEmail("user3@gmail.com").build(),
-        };
+        String[] lines = FileReaderUtill.readFile(filePath);
+        User[] users = new User[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            String[] splits = lines[i].split(",");
+            users[i] = new User.Builder()
+                    .setName(splits[0])
+                    .setPassword(splits[1])
+                    .setEmail(splits[2])
+                    .build();
+        }
+        return users;
     }
 }

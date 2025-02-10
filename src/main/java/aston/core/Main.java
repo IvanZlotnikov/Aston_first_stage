@@ -40,7 +40,8 @@ public class Main {
             fileWriter.clearFile("output_buses.txt");
             fileWriter.clearFile("output_users.txt");
             fileWriter.clearFile("output_students.txt");
-            fileWriter.clearFile("found_data.txt");
+            //скорее всего его чистить не нужно
+//            fileWriter.clearFile("found_data.txt");
 
             Map<Integer, Consumer<BufferedReader>> actions = new HashMap<>();
             actions.put(1, br -> {

@@ -18,19 +18,29 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class Main {
+    private static int foundDataIndex = 0;
+
     public static void main(String[] args) {
-        DataFiller<Bus> busFiller = new BusDataFiller();
-        DataFiller<User> userFiller = new UserDataFiller();
-        DataFiller<Student> studentFiller = new StudentDataFiller();
+        DataFiller<Bus> busFiller = new BusDataFiller("buses.txt");
+        DataFiller<User> userFiller = new UserDataFiller("users.txt");
+        DataFiller<Student> studentFiller = new StudentDataFiller("students.txt");
 
         Bus[] buses = busFiller.fillData();
         User[] users = userFiller.fillData();
         Student[] students = studentFiller.fillData();
 
+        String[] foundData = new String[100];
+
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean exit = false;
             DataValidator validator = new DataValidator();
             FileWriterUtill fileWriter = new FileWriterUtill();
+
+            //clear all files
+            fileWriter.clearFile("output_buses.txt");
+            fileWriter.clearFile("output_users.txt");
+            fileWriter.clearFile("output_students.txt");
+            fileWriter.clearFile("found_data.txt");
 
             Map<Integer, Consumer<BufferedReader>> actions = new HashMap<>();
             actions.put(1, br -> {
@@ -38,7 +48,7 @@ public class Main {
                     System.out.println("Введите пробег для поиска: ");
                     int mileage = Integer.parseInt(br.readLine());
                     Bus busTarget = new Bus.Builder().setMileage(mileage).build();
-                    SearchStrategy<Bus> busSearch = new SearchStrategy<>(buses, busTarget);
+                    SearchStrategy<Bus> busSearch = new SearchStrategy<>(buses, busTarget,foundData,foundDataIndex);
                     busSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -49,7 +59,7 @@ public class Main {
                     System.out.println("Введите имя для поиска: ");
                     String name = br.readLine();
                     User userTarget = new User.Builder().setName(name).build();
-                    SearchStrategy<User> userSearch = new SearchStrategy<>(users, userTarget);
+                    SearchStrategy<User> userSearch = new SearchStrategy<>(users, userTarget,foundData,foundDataIndex);
                     userSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -60,7 +70,7 @@ public class Main {
                     System.out.println("Введите средний бал для поиска: ");
                     double averageGrade = Double.parseDouble(br.readLine());
                     Student studentTarget = new Student.Builder().setAverageGrade(averageGrade).build();
-                    SearchStrategy<Student> studentSearch = new SearchStrategy<>(students, studentTarget);
+                    SearchStrategy<Student> studentSearch = new SearchStrategy<>(students, studentTarget,foundData,foundDataIndex);
                     studentSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -69,18 +79,21 @@ public class Main {
             actions.put(4, br -> {
                 for (Bus bus : buses) {
                     if (validator.validate(bus.toString())) {
-                        fileWriter.writeToFile(bus.toString(), "output_buses.txt");
+                        fileWriter.writeToFile(bus.toString(), "output_buses.txt", true);
                     }
                 }
                 for (User user : users) {
                     if (validator.validate(user.toString())) {
-                        fileWriter.writeToFile(user.toString(), "output_users.txt");
+                        fileWriter.writeToFile(user.toString(), "output_users.txt", true);
                     }
                 }
                 for (Student student : students) {
                     if (validator.validate(student.toString())) {
-                        fileWriter.writeToFile(student.toString(), "output_students.txt");
+                        fileWriter.writeToFile(student.toString(), "output_students.txt", true);
                     }
+                }
+                for (int i = 0; i < foundDataIndex; i++) {
+                    fileWriter.writeToFile(foundData[i], "found_data.txt", true);
                 }
                 System.out.println("Данные записанны в файл.");
             });
@@ -109,6 +122,13 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Ошибка с BufferedReader: " + e.getMessage());
         }
+    }
 
+    public static int getFoundDataIndex() {
+        return foundDataIndex;
+    }
+
+    public static void incrementFoundDataIndex(){
+        foundDataIndex++;
     }
 }

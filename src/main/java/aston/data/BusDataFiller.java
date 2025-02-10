@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 
 public class BusDataFiller implements DataFiller<Bus> {
-    private String filePath;
+    private final String filePath;
 
     public BusDataFiller(String filePath) {
         this.filePath = filePath;

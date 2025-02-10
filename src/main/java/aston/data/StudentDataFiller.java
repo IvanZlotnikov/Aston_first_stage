@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StudentDataFiller implements DataFiller<Student> {
-    private String filePath;
+    private final String filePath;
 
     public StudentDataFiller(String filePath) {
         this.filePath = filePath;

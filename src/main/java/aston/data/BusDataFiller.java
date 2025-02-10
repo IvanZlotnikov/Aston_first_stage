@@ -2,14 +2,28 @@ package aston.data;
 
 import aston.core.DataFiller;
 import aston.model.Bus;
+import aston.utils.FileReaderUtill;
+
 
 public class BusDataFiller implements DataFiller<Bus> {
+    private String filePath;
+
+    public BusDataFiller(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
     public Bus[] fillData() {
-        return new Bus[]{
-                new Bus.Builder().setNumber("123").setModel("ModelA").setMileage(1500).build(),
-                new Bus.Builder().setNumber("456").setModel("ModelB").setMileage(1000).build(),
-                new Bus.Builder().setNumber("789").setModel("ModelC").setMileage(2000).build()
-        };
+        String[] lines = FileReaderUtill.readFile(filePath);
+        Bus[] buses = new Bus[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            String[] splits = lines[i].split(",");
+            buses[i] = new Bus.Builder()
+                    .setNumber(splits[0])
+                    .setModel(splits[1])
+                    .setMileage(Integer.parseInt(splits[2]))
+                    .build();
+        }
+        return buses;
     }
 }

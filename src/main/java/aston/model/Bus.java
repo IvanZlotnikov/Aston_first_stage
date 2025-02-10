@@ -7,7 +7,7 @@ import aston.utils.UtilsToProject;
 
 public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
 
-    private final String number;
+    private final int number;
     private final String model;
     private final int mileage;
 
@@ -17,7 +17,7 @@ public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus
         this.mileage = builder.mileage;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
@@ -57,11 +57,11 @@ public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus
     }
 
     public static class Builder {
-        private String number;
+        private int number;
         private String model;
         private int mileage;
 
-        public Builder setNumber(String number) {
+        public Builder setNumber(int number) {
             this.number = number;
             return this;
         }

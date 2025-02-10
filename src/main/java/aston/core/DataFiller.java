@@ -3,6 +3,8 @@ package aston.core;
 //для заполнения данных.
 public interface DataFiller<T> {
 
-    T[] fillData();
+    T[] fillDataFromFile();
+    T[] fillDataRandomly(int count);
+    T[] fillDataManually();
 
 }

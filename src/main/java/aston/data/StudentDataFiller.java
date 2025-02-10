@@ -1,28 +1,39 @@
 package aston.data;
 
-import aston.core.DataFiller;
+import aston.data.AbstractDataFiller;
 import aston.model.Student;
-import aston.utils.FileReaderUtill;
 
-public class StudentDataFiller implements DataFiller<Student> {
-    private String filePath;
-
-    public StudentDataFiller(String filePath) {
-        this.filePath = filePath;
+public class StudentDataFiller extends AbstractDataFiller<Student> {
+    @Override
+    public Student createFromString(String data) {
+        String[] parts = data.split(",");
+        if (parts.length != 3) {
+            throw new IllegalArgumentException("Неверный формат данных: " + data);
+        }
+        return new Student.Builder()
+                .setGroupNumber(Integer.parseInt(parts[0].trim()))
+                .setAverageGrade(Double.parseDouble(parts[1].trim()))
+                .setRecordBookNumber(Integer.parseInt(parts[2].trim()))
+                .build();
     }
 
     @Override
-    public Student[] fillData() {
-        String[] lines = FileReaderUtill.readFile(filePath);
-        Student[] students = new Student[lines.length];
-        for (int i = 0; i < lines.length; i++) {
-            String[] splits = lines[i].split(",");
+    public Student[] generateRandomData(int size) {
+        Student[] students = new Student[size];
+        for (int i = 0; i < size; i++) {
             students[i] = new Student.Builder()
-                    .setGroupNumber(Integer.parseInt(splits[0]))
-                    .setAverageGrade(Double.parseDouble(splits[1]))
-                    .setRecordBookNumber(Integer.parseInt(splits[2]))
+                    .setGroupNumber(random.nextInt(100) + 1)
+                    .setAverageGrade(Math.round((2.0 + random.nextDouble() * 3.0) * 10.0) / 10.0)
+                    .setRecordBookNumber(random.nextInt(1000))
                     .build();
         }
         return students;
+    }
+
+    @Override
+    public Student[] fillDataFromFile( int size) {
+        // Заглушка для чтения из файла
+        System.out.println("Чтение студентов из файла пока не реализовано.");
+        return new Student[0];
     }
 }

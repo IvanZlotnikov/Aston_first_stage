@@ -1,18 +1,19 @@
 package aston.strategy;
 
 import aston.core.BinarySearchable;
+import aston.core.Main;
 import aston.core.Sortable;
-import aston.utils.FileWriterUtill;
 
 public class SearchStrategy<T extends Sortable<T> & BinarySearchable<T>> {
 
     private final T[] data;
     private final T target;
-    private final FileWriterUtill fileWriter = new FileWriterUtill();
+    private final String[] foundData;
 
-    public SearchStrategy(T[] data, T target) {
+    public SearchStrategy(T[] data, T target, String[] foundData, int foundDataIndex) {
         this.data = data;
         this.target = target;
+        this.foundData = foundData;
     }
 
     //соединяем сортировку и бинарный поиск
@@ -23,7 +24,8 @@ public class SearchStrategy<T extends Sortable<T> & BinarySearchable<T>> {
         int index = data[0].binarySearch(data, target);
         if (index >= 0) {
             System.out.println("Found: " + data[index]);
-            fileWriter.writeToFile(data[index].toString(), "found_data.txt");
+            foundData[Main.getFoundDataIndex()] = data[index].toString();
+            Main.incrementFoundDataIndex();
         } else
             System.out.println("Not found: " + target);
     }

@@ -65,7 +65,7 @@ public class User implements Comparable<User>, Sortable<User>, BinarySearchable<
     public int compareTo(User target) {
         if (target == null)
             throw new IllegalArgumentException("target is null");
-        return this.name.compareTo(target.name);
+        return this.name.compareToIgnoreCase(target.name);
     }
     @Override
     public int binarySearch(User[] array, User target) {

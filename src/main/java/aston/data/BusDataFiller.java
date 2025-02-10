@@ -6,7 +6,7 @@ import aston.utils.FileReaderUtill;
 
 
 public class BusDataFiller implements DataFiller<Bus> {
-    private String filePath;
+    private final String filePath;
 
     public BusDataFiller(String filePath) {
         this.filePath = filePath;
@@ -19,7 +19,7 @@ public class BusDataFiller implements DataFiller<Bus> {
         for (int i = 0; i < lines.length; i++) {
             String[] splits = lines[i].split(",");
             buses[i] = new Bus.Builder()
-                    .setNumber(splits[0])
+                    .setNumber(Integer.parseInt(splits[0]))
                     .setModel(splits[1])
                     .setMileage(Integer.parseInt(splits[2]))
                     .build();

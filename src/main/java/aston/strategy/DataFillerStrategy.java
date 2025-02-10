@@ -3,6 +3,8 @@ package aston.strategy;
 //для заполнения данных.
 public interface DataFillerStrategy<T> {
 
-    T[] fillData();
+    T[] fillDataFromFile();
+    T[] fillDataRandomly(int count);
+    T[] fillDataManually();
 
 }

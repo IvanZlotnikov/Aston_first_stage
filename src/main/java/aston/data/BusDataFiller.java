@@ -3,6 +3,8 @@ package aston.data;
 import aston.model.Bus;
 import aston.utils.FileReaderUtill;
 import aston.strategy.DataFillerStrategy;
+import java.util.Random;
+import java.util.Scanner;
 
 
 public class BusDataFiller implements DataFillerStrategy<Bus> {
@@ -13,7 +15,7 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
     }
 
     @Override
-    public Bus[] fillData() {
+    public Bus[] fillDataFromFile() {
         String[] lines = FileReaderUtill.readFile(filePath);
         Bus[] buses = new Bus[lines.length];
         for (int i = 0; i < lines.length; i++) {
@@ -22,6 +24,45 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
                     .setNumber(Integer.parseInt(splits[0]))
                     .setModel(splits[1])
                     .setMileage(Integer.parseInt(splits[2]))
+                    .build();
+        }
+        return buses;
+    }
+
+    @Override
+    public Bus[] fillDataRandomly(int count) {
+        Random random = new Random();
+        Bus[] buses = new Bus[count];
+        for (int i = 0; i < count; i++) {
+            int number = random.nextInt(100);
+            String model = "Model" + random.nextInt(100);
+            int mileage = random.nextInt(10000) + 1000;
+            buses[i] = new Bus.Builder()
+                    .setNumber(number)
+                    .setModel(model)
+                    .setMileage(mileage)
+                    .build();
+        }
+        return buses;
+    }
+
+    @Override
+    public Bus[] fillDataManually() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter count of buses: ");
+        int count = scanner.nextInt();
+        Bus[] buses = new Bus[count];
+        for (int i = 0; i < count; i++) {
+            System.out.println("Enter bus number: ");
+            int number = scanner.nextInt();
+            System.out.println("Enter bus model: ");
+            String model = scanner.next();
+            System.out.println("Enter bus mileage: ");
+            int mileage = scanner.nextInt();
+            buses[i] = new Bus.Builder()
+                    .setNumber(number)
+                    .setModel(model)
+                    .setMileage(mileage)
                     .build();
         }
         return buses;

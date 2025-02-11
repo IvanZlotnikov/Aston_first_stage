@@ -46,7 +46,7 @@ public class Main {
                 students = studentFiller.fillDataFromFile();
                 break;
             case 2:
-                System.out.println("Ввелите количество автобусов: ");
+                System.out.println("Введите количество автобусов: ");
                 int busCount = scanner.nextInt();
                 buses = busFiller.fillDataRandomly(busCount);
 

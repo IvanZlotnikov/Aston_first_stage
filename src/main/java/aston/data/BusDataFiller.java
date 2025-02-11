@@ -21,14 +21,19 @@ public class BusDataFiller extends AbstractDataFiller<Bus> {
     public Bus[] generateRandomData(int size) {
         Bus[] buses = new Bus[size];
         for (int i = 0; i < size; i++) {
+            int number = random.nextInt(900) + 100; // Генерируем только число
+            String model = "Model" + random.nextInt(100); // Модель - строка
+            int mileage = random.nextInt(50000); // Пробег - число
+
             buses[i] = new Bus.Builder()
-                    .setNumber(Integer.parseInt("Bus" + (i + 1)))
-                    .setModel("Model" + random.nextInt(100))
-                    .setMileage(random.nextInt(50000))
+                    .setNumber(number) // Передаем число
+                    .setModel(model) // Передаем строку
+                    .setMileage(mileage) // Передаем число
                     .build();
         }
         return buses;
     }
+    
 
     @Override
     public Bus[] fillDataFromFile(int size) {

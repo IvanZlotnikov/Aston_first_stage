@@ -5,12 +5,17 @@ import aston.core.DataFiller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.lang.reflect.Array;
+
 
 public abstract class AbstractDataFiller<T> implements DataFiller<T> {
     protected final Random random = new Random();
+    private final Class<T> type; // Добавляем хранение класса
+
+    protected AbstractDataFiller(Class<T> type) {
+        this.type = type;
+    }
 
     public abstract T createFromString(String data);
 
@@ -22,7 +27,7 @@ public abstract class AbstractDataFiller<T> implements DataFiller<T> {
         } else if (method.equals("file")) {
             return fillDataFromFile(size);
         } else {
-            return (T[]) new Comparable[0];
+            return (T[]) Array.newInstance(type, 0);
         }
     }
 
@@ -31,13 +36,20 @@ public abstract class AbstractDataFiller<T> implements DataFiller<T> {
     protected abstract T[] fillDataFromFile(int size);
 
     protected T[] fillDataManually(int size) {
-        T[] array = (T[]) new Comparable[size];
+        T[] array = (T[]) Array.newInstance(type, size); // Правильное создание массива
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             for (int i = 0; i < size; i++) {
-                System.out.println("Введите данные для объекта " + (i + 1) + ":");
-                String input = reader.readLine();
-                array[i] = createFromString(input);
+                while (true) {
+                    try {
+                        System.out.println("Введите данные для объекта " + (i + 1) + ":");
+                        String input = reader.readLine();
+                        array[i] = createFromString(input);
+                        break;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Ошибка: " + e.getMessage() + " Попробуйте снова.");
+                    }
+                }
             }
         } catch (IOException e) {
             System.out.println("Ошибка ввода: " + e.getMessage());

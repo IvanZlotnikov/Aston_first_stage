@@ -4,6 +4,7 @@ import aston.model.User;
 import aston.utils.FileReaderUtill;
 import aston.strategy.DataFillerStrategy;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,7 +47,14 @@ public class UserDataFiller implements DataFillerStrategy<User> {
     public User[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter count of user: ");
-        int count = scanner.nextInt();
+        int count = 0;
+        try {
+            count = scanner.nextInt();
+        }
+        catch (
+                InputMismatchException e){
+            System.out.println("вы ввели не цифру!!");
+            return fillDataManually();}
         User[] users = new User[count];
         for (int i = 0; i < count; i++) {
             System.out.println("Enter user name: ");

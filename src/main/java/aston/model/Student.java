@@ -3,9 +3,10 @@ package aston.model;
 import aston.utils.UtilsToProject;
 import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
+import aston.strategy.Evenness;
 
 
-public class Student implements Comparable<Student>, SortStrategy<Student>, SearchStrategy<Student> {
+public class Student implements Comparable<Student>, SortStrategy<Student>, SearchStrategy<Student>, Evenness {
 
     private final int groupNumber;
     private final double averageGrade;
@@ -43,6 +44,11 @@ public class Student implements Comparable<Student>, SortStrategy<Student>, Sear
         if (target == null)
             throw new IllegalArgumentException("target is null");
         return Double.compare(this.averageGrade, target.averageGrade);
+    }
+    
+    @Override
+    public boolean isEven() {
+        return ((averageGrade % 2) == 0);
     }
 
     @Override

@@ -3,9 +3,10 @@ package aston.model;
 import aston.utils.UtilsToProject;
 import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
+import aston.strategy.Evenness;
 
 
-public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<Bus> {
+public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<Bus>, Evenness {
 
     private final int number;
     private final String model;
@@ -44,7 +45,11 @@ public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<B
             throw new IllegalArgumentException("target == null");
         return Integer.compare(this.mileage, target.mileage);
     }
-
+    
+    @Override
+    public boolean isEven() {
+        return ((mileage % 2) == 0);
+    }
 
     @Override
     public int searchFor(Bus[] array, Bus target) {

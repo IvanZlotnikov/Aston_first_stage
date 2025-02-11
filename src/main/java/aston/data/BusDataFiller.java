@@ -3,6 +3,8 @@ package aston.data;
 import aston.model.Bus;
 import aston.utils.FileReaderUtill;
 import aston.strategy.DataFillerStrategy;
+
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -50,7 +52,16 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
     public Bus[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter count of buses: ");
-        int count = scanner.nextInt();
+        int count = 0;
+        try {
+            count = scanner.nextInt();
+        }
+        catch (
+                InputMismatchException e){
+            System.out.println("вы ввели не цифру!!");
+            return fillDataManually();}
+
+
         Bus[] buses = new Bus[count];
         for (int i = 0; i < count; i++) {
             System.out.println("Enter bus number: ");

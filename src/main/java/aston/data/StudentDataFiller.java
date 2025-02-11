@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-
+//для заполнения данными Студента
 public class StudentDataFiller implements DataFillerStrategy<Student> {
     private final String filePath;
 
@@ -52,22 +52,22 @@ public class StudentDataFiller implements DataFillerStrategy<Student> {
     @Override
     public Student[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter count of students: ");
-        int count = 0;
+        System.out.println("Введите количество студентов: ");
+        int count;
         try {
             count = scanner.nextInt();
+        } catch (
+                InputMismatchException e) {
+            System.out.println("Вы ввели не цифру!!");
+            return fillDataManually();
         }
-        catch (
-                InputMismatchException e){
-            System.out.println("вы ввели не цифру!!");
-            return fillDataManually();}
         Student[] students = new Student[count];
         for (int i = 0; i < count; i++) {
-            System.out.println("Enter group number of student: ");
+            System.out.println("Введите номер группы студента: ");
             int groupNumber = scanner.nextInt();
-            System.out.println("Enter average grade of student: ");
+            System.out.println("Введите средний балл студента: ");
             double averageGrade = scanner.nextDouble();
-            System.out.println("Enter record book number of student: ");
+            System.out.println("Введите номер зачетной книги студента: ");
             int recordBookNumber = scanner.nextInt();
             students[i] = new Student.Builder()
                     .setGroupNumber(groupNumber)

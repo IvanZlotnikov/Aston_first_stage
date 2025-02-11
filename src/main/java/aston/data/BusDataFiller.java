@@ -8,9 +8,9 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-
+// заполнение данными Автобус
 public class BusDataFiller implements DataFillerStrategy<Bus> {
-    private String filePath;
+    private final String filePath;
 
     public BusDataFiller(String filePath) {
         this.filePath = filePath;
@@ -51,24 +51,24 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
     @Override
     public Bus[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter count of buses: ");
-        int count = 0;
+        System.out.println("Введите количество автобусов: ");
+        int count ;
         try {
             count = scanner.nextInt();
+        } catch (
+                InputMismatchException e) {
+            System.out.println("Вы ввели не цифру!!");
+            return fillDataManually();
         }
-        catch (
-                InputMismatchException e){
-            System.out.println("вы ввели не цифру!!");
-            return fillDataManually();}
 
 
         Bus[] buses = new Bus[count];
         for (int i = 0; i < count; i++) {
-            System.out.println("Enter bus number: ");
+            System.out.println("Введите номер автобуса: ");
             int number = scanner.nextInt();
-            System.out.println("Enter bus model: ");
+            System.out.println("Введите модель автобуса: ");
             String model = scanner.next();
-            System.out.println("Enter bus mileage: ");
+            System.out.println("Введите пробег автобуса: ");
             int mileage = scanner.nextInt();
             buses[i] = new Bus.Builder()
                     .setNumber(number)

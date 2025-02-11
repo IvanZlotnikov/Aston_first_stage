@@ -4,6 +4,7 @@ import aston.core.Main;
 import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
 
+//для сортировки и поиска
 public class SearchAndSort<T extends SortStrategy<T> & SearchStrategy<T>> {
 
     private final T[] data;

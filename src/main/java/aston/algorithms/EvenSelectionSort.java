@@ -3,6 +3,7 @@ package aston.algorithms;
 import aston.strategy.SortStrategy;
 import aston.strategy.Evenness;
 
+// сортировка выбором для четных элементов
 public class EvenSelectionSort<T extends Comparable & Evenness> implements SortStrategy<T> {
 
     @Override

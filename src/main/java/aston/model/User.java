@@ -5,6 +5,7 @@ import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
 
 
+//представление пользователя
 public class User implements Comparable<User>, SortStrategy<User>, SearchStrategy<User> {
     private final String name;
     private final String password;

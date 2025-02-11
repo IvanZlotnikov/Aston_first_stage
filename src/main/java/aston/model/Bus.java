@@ -5,7 +5,7 @@ import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
 import aston.strategy.Evenness;
 
-
+//Представление автобуса
 public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<Bus>, Evenness {
 
     private final int number;

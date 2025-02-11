@@ -5,7 +5,7 @@ import aston.strategy.SearchStrategy;
 import aston.strategy.SortStrategy;
 import aston.strategy.Evenness;
 
-
+// представление студента
 public class Student implements Comparable<Student>, SortStrategy<Student>, SearchStrategy<Student>, Evenness {
 
     private final int groupNumber;

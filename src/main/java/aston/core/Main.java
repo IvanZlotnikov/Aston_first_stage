@@ -1,5 +1,7 @@
 package aston.core;
 
+import aston.algorithms.EvenSelectionSort;
+import aston.algorithms.SelectionSort;
 import aston.strategy.DataFillerStrategy;
 import aston.data.BusDataFiller;
 import aston.data.StudentDataFiller;
@@ -7,6 +9,7 @@ import aston.data.UserDataFiller;
 import aston.model.Bus;
 import aston.model.Student;
 import aston.model.User;
+import aston.strategy.SortStrategy;
 import aston.utils.SearchAndSort;
 import aston.utils.DataValidator;
 import aston.utils.FileWriterUtill;
@@ -22,9 +25,11 @@ import java.util.function.Consumer;
 public class Main {
     private static String[] foundData = new String[100];
     private static int foundDataIndex = 0;
+    private static SortStrategy<?> sortStrategy;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Выберите способ заполнения данных:");
         System.out.println("1 - из файла: ");
         System.out.println("2 - случайные данные: ");
@@ -70,19 +75,38 @@ public class Main {
                 students = studentFiller.fillDataFromFile();
                 break;
         }
+        //меню с выбором сортировки
+        System.out.println("Выберите алгоритм сортировки: ");
+        System.out.println("1 - Сортировка выбором ");
+        System.out.println("2 - Сортировка четных позиций ");
+        int choiceSort = scanner.nextInt();
 
-        String[] foundData = new String[100];
+        switch (choiceSort) {
+            case 1:
+                sortStrategy = new SelectionSort<>();
+                break;
+            case 2:
+                sortStrategy = new EvenSelectionSort<>();
+                break;
+            default:
+                System.out.println("Неверный выбор. По умолчанию используется сортировка выбором.");
+                sortStrategy = new SelectionSort<>();
+                break;
+        }
+            //применение выбранной стратегии сортировки
+//        if (choiceSort == 2) {
+//            sortStrategy.sort(buses);
+//            sortStrategy.sort(users);
+//            sortStrategy.sort(students);
+//        }
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean exit = false;
             DataValidator validator = new DataValidator();
             FileWriterUtill fileWriter = new FileWriterUtill();
 
-            //clear all files
-            fileWriter.clearFile("output_buses.txt");
-            fileWriter.clearFile("output_users.txt");
-            fileWriter.clearFile("output_students.txt");
-            fileWriter.clearFile("found_data.txt");
+            //очистка файлов перед началом
+            clearAllFilesBeforeStart(fileWriter);
 
             Map<Integer, Consumer<BufferedReader>> actions = new HashMap<>();
             actions.put(1, br -> {
@@ -94,7 +118,7 @@ public class Main {
                     System.out.println("Введите пробег для поиска: ");
                     int mileage = Integer.parseInt(br.readLine());
                     Bus busTarget = new Bus.Builder().setMileage(mileage).build();
-                    SearchAndSort<Bus> busSearch = new SearchAndSort<>(buses, busTarget,foundData,foundDataIndex);
+                    SearchAndSort<Bus> busSearch = new SearchAndSort<>(buses, busTarget, foundData, foundDataIndex);
                     busSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -109,7 +133,7 @@ public class Main {
                     System.out.println("Введите имя для поиска: ");
                     String name = br.readLine();
                     User userTarget = new User.Builder().setName(name).build();
-                    SearchAndSort<User> userSearch = new SearchAndSort<>(users, userTarget,foundData,foundDataIndex);
+                    SearchAndSort<User> userSearch = new SearchAndSort<>(users, userTarget, foundData, foundDataIndex);
                     userSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -124,7 +148,7 @@ public class Main {
                     System.out.println("Введите средний балл для поиска: ");
                     double averageGrade = Double.parseDouble(br.readLine());
                     Student studentTarget = new Student.Builder().setAverageGrade(averageGrade).build();
-                    SearchAndSort<Student> studentSearch = new SearchAndSort<>(students, studentTarget,foundData,foundDataIndex);
+                    SearchAndSort<Student> studentSearch = new SearchAndSort<>(students, studentTarget, foundData, foundDataIndex);
                     studentSearch.execute();
                 } catch (IOException e) {
                     System.out.println("Ошибка ввода: " + e.getMessage());
@@ -157,9 +181,9 @@ public class Main {
 
             while (!exit) {
                 System.out.println("Выберите действие: ");
-                System.out.println("1. Сортировка и поиск автобусов");
-                System.out.println("2. Сортировка и поиск пользователей");
-                System.out.println("3. Сортировка и поиск студентов");
+                System.out.println("1. Поиск автобусов");
+                System.out.println("2. Поиск пользователей");
+                System.out.println("3. Поиск студентов");
                 System.out.println("4. Записать данные в файл");
                 System.out.println("5. Выйти");
 
@@ -179,6 +203,15 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Ошибка с BufferedReader: " + e.getMessage());
         }
+        scanner.close(); // закрытые сканера
+    }
+
+    //очиста файлов
+    private static void clearAllFilesBeforeStart(FileWriterUtill fileWriter) {
+        fileWriter.clearFile("output_buses.txt");
+        fileWriter.clearFile("output_users.txt");
+        fileWriter.clearFile("output_students.txt");
+        fileWriter.clearFile("found_data.txt");
     }
 
     public static int getFoundDataIndex() {
@@ -188,7 +221,8 @@ public class Main {
     public static void incrementFoundDataIndex() {
         foundDataIndex++;
     }
-    private static void clearFoundData(){
+
+    private static void clearFoundData() {
         foundData = new String[100];
         foundDataIndex = 0;
     }

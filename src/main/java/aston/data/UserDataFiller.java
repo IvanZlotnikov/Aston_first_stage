@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+//для заполнения данных пользователя
 public class UserDataFiller implements DataFillerStrategy<User> {
     private final String filePath;
 
@@ -38,7 +39,11 @@ public class UserDataFiller implements DataFillerStrategy<User> {
             String name = "User" + random.nextInt(100);
             String password = "password" + random.nextInt(100);
             String email = "email" + random.nextInt(100) + "@gmail.com";
-            users[i] = new User.Builder().setName(name).setPassword(password).setEmail(email).build();
+            users[i] = new User.Builder()
+                    .setName(name)
+                    .setPassword(password)
+                    .setEmail(email)
+                    .build();
         }
         return users;
     }
@@ -46,24 +51,27 @@ public class UserDataFiller implements DataFillerStrategy<User> {
     @Override
     public User[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter count of user: ");
-        int count = 0;
+        System.out.println("Введите количество пользователей: ");
+        int count ;
         try {
             count = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Вы ввели не цифру!!");
+            return fillDataManually();
         }
-        catch (
-                InputMismatchException e){
-            System.out.println("вы ввели не цифру!!");
-            return fillDataManually();}
         User[] users = new User[count];
         for (int i = 0; i < count; i++) {
-            System.out.println("Enter user name: ");
+            System.out.println("Введите имя пользователя: ");
             String name = scanner.next();
-            System.out.println("Enter user password: ");
+            System.out.println("Введите пароль пользователя: ");
             String password = scanner.next();
-            System.out.println("Enter user email: ");
+            System.out.println("Введите имейл пользователя: ");
             String email = scanner.next();
-            users[i] = new User.Builder().setName(name).setPassword(password).setEmail(email).build();
+            users[i] = new User.Builder()
+                    .setName(name)
+                    .setPassword(password)
+                    .setEmail(email)
+                    .build();
         }
         return users;
     }

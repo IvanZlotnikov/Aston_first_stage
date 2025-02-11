@@ -121,7 +121,7 @@ public class Main {
                     System.out.println(student);
                 }
                 try {
-                    System.out.println("Введите средний бал для поиска: ");
+                    System.out.println("Введите средний балл для поиска: ");
                     double averageGrade = Double.parseDouble(br.readLine());
                     Student studentTarget = new Student.Builder().setAverageGrade(averageGrade).build();
                     SearchAndSort<Student> studentSearch = new SearchAndSort<>(students, studentTarget,foundData,foundDataIndex);

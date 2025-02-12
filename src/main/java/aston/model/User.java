@@ -31,11 +31,7 @@ public class User implements Comparable<User>, SortStrategy<User>, SearchStrateg
 
     @Override
     public String toString() {
-        return "User{" +
-               "name='" + name + '\'' +
-               ", password='" + password + '\'' +
-               ", email='" + email + '\'' +
-               '}';
+        return String.format("Пользователь: %s | Email: %s | Пароль: %s", name, email, password);
     }
 
     public static class Builder {

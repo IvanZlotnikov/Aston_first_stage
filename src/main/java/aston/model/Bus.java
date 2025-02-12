@@ -32,12 +32,9 @@ public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<B
 
     @Override
     public String toString() {
-        return "Bus{" +
-               "number='" + number + '\'' +
-               ", model='" + model + '\'' +
-               ", mileage=" + mileage +
-               '}';
+        return String.format("Автобус №%-3d | Модель: %-10s | Пробег: %,d км", number, model, mileage);
     }
+
 
     @Override
     public int compareTo(Bus target) {

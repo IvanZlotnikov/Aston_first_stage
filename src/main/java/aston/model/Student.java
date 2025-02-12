@@ -32,12 +32,10 @@ public class Student implements Comparable<Student>, SortStrategy<Student>, Sear
 
     @Override
     public String toString() {
-        return "Student{" +
-               "groupNumber=" + groupNumber +
-               ", averageGrade=" + averageGrade +
-               ", recordBookNumber=" + recordBookNumber +
-               '}';
+        return String.format("Студент [Группа: %d | Средний балл: %.2f | Зачётка №%d]",
+                groupNumber, averageGrade, recordBookNumber);
     }
+
 
     @Override
     public int compareTo(Student target) {

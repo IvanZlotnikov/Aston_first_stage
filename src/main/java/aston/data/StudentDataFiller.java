@@ -86,7 +86,7 @@ public class StudentDataFiller implements DataFillerStrategy<Student> {
                     scanner.next();
                 }
                 recordBookNumber=scanner.nextInt();
-            }while (recordBookNumber<=0);;
+            }while (recordBookNumber<=0);
             students[i] = new Student.Builder()
                     .setGroupNumber(groupNumber)
                     .setAverageGrade(averageGrade)

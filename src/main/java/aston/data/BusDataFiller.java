@@ -51,7 +51,7 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
     @Override
     public Bus[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter count of buses: ");
+        System.out.println("Введите колличество автобусов: ");
         int count = 0;
         try {
             count = scanner.nextInt();

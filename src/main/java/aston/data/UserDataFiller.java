@@ -7,6 +7,7 @@ import aston.strategy.DataFillerStrategy;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 //для заполнения данных пользователя
 public class UserDataFiller implements DataFillerStrategy<User> {
@@ -65,8 +66,18 @@ public class UserDataFiller implements DataFillerStrategy<User> {
             String name = scanner.next();
             System.out.println("Введите пароль пользователя: ");
             String password = scanner.next();
-            System.out.println("Введите имейл пользователя: ");
-            String email = scanner.next();
+            String email;
+            boolean b = false;
+            System.out.println("Введите свою електронную почту: ");
+            do {
+                email = scanner.nextLine();
+                String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+                b = email.matches(email_regex);
+            } while (!b);
+            {
+                System.out.println("почта валидна !!!");
+            }
             users[i] = new User.Builder()
                     .setName(name)
                     .setPassword(password)

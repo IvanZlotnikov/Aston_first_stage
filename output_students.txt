@@ -1,3 +1,2 @@
-Student{groupNumber=11, averageGrade=5.5, recordBookNumber=2}
-Student{groupNumber=12, averageGrade=4.5, recordBookNumber=1}
-Student{groupNumber=13, averageGrade=6.5, recordBookNumber=3}
+Student{groupNumber=12, averageGrade=12.0, recordBookNumber=12}
+Student{groupNumber=13, averageGrade=13.0, recordBookNumber=13}

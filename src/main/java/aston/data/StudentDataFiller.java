@@ -63,12 +63,30 @@ public class StudentDataFiller implements DataFillerStrategy<Student> {
         }
         Student[] students = new Student[count];
         for (int i = 0; i < count; i++) {
-            System.out.println("Введите номер группы студента: ");
-            int groupNumber = scanner.nextInt();
-            System.out.println("Введите средний балл студента: ");
-            double averageGrade = scanner.nextDouble();
-            System.out.println("Введите номер зачетной книги студента: ");
-            int recordBookNumber = scanner.nextInt();
+            int groupNumber;
+            do {System.out.println("Введите номер группы студента: ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не номер!!!");
+                    scanner.next();
+                }
+                groupNumber=scanner.nextInt();
+            }while (groupNumber<=0);;
+            double averageGrade;
+            do {System.out.println("Введите средний балл студента: ");
+                while (!scanner.hasNextDouble()){
+                    System.out.println("Это не средний бал!!!");
+                    scanner.next();
+                }
+                averageGrade=scanner.nextDouble();
+            }while (averageGrade<=0);
+            int recordBookNumber;
+            do {System.out.println("Введите номер зачетной книги студента: ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не номер зачетной книги!!!");
+                    scanner.next();
+                }
+                recordBookNumber=scanner.nextInt();
+            }while (recordBookNumber<=0);;
             students[i] = new Student.Builder()
                     .setGroupNumber(groupNumber)
                     .setAverageGrade(averageGrade)

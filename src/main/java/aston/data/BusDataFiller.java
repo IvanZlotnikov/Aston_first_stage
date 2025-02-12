@@ -8,9 +8,9 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-// заполнение данными Автобус
+
 public class BusDataFiller implements DataFillerStrategy<Bus> {
-    private final String filePath;
+    private String filePath;
 
     public BusDataFiller(String filePath) {
         this.filePath = filePath;
@@ -51,25 +51,39 @@ public class BusDataFiller implements DataFillerStrategy<Bus> {
     @Override
     public Bus[] fillDataManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите количество автобусов: ");
-        int count ;
+        System.out.println("Enter count of buses: ");
+        int count = 0;
         try {
             count = scanner.nextInt();
-        } catch (
-                InputMismatchException e) {
-            System.out.println("Вы ввели не цифру!!");
-            return fillDataManually();
         }
+        catch (
+                InputMismatchException e){
+            System.out.println("вы ввели не цифру!!");
+            return fillDataManually();}
 
 
         Bus[] buses = new Bus[count];
         for (int i = 0; i < count; i++) {
-            System.out.println("Введите номер автобуса: ");
-            int number = scanner.nextInt();
+
+            int number;
+            do {System.out.println("введите номер автобуса: ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не номер!!!");
+                    scanner.next();
+                }
+                number=scanner.nextInt();
+            }while (number<=0);;
             System.out.println("Введите модель автобуса: ");
             String model = scanner.next();
-            System.out.println("Введите пробег автобуса: ");
-            int mileage = scanner.nextInt();
+            int mileage;
+            do {System.out.println("введите пробег автобуса ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не пробег!!!");
+                    scanner.next();
+                }
+                mileage=scanner.nextInt();
+            }while (mileage<=0);;
+
             buses[i] = new Bus.Builder()
                     .setNumber(number)
                     .setModel(model)

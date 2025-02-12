@@ -81,6 +81,7 @@ public class Main {
         System.out.println("2 - Сортировка четных позиций ");
         int choiceSort = scanner.nextInt();
 
+//      не работает
         switch (choiceSort) {
             case 1:
                 sortStrategy = new SelectionSort<>();

@@ -1,11 +1,12 @@
 package aston.model;
 
-import aston.core.BinarySearchable;
-import aston.core.Sortable;
 import aston.utils.UtilsToProject;
+import aston.strategy.SearchStrategy;
+import aston.strategy.SortStrategy;
+import aston.strategy.Evenness;
 
-
-public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus> {
+//Представление автобуса
+public class Bus implements Comparable<Bus>, SortStrategy<Bus>, SearchStrategy<Bus>, Evenness {
 
     private final int number;
     private final String model;
@@ -31,12 +32,9 @@ public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus
 
     @Override
     public String toString() {
-        return "Bus{" +
-               "number='" + number + '\'' +
-               ", model='" + model + '\'' +
-               ", mileage=" + mileage +
-               '}';
+        return String.format("Автобус №%-3d | Модель: %-10s | Пробег: %,d км", number, model, mileage);
     }
+
 
     @Override
     public int compareTo(Bus target) {
@@ -44,10 +42,14 @@ public class Bus implements Comparable<Bus>, Sortable<Bus>, BinarySearchable<Bus
             throw new IllegalArgumentException("target == null");
         return Integer.compare(this.mileage, target.mileage);
     }
-
+    
+    @Override
+    public boolean isEven() {
+        return ((mileage % 2) == 0);
+    }
 
     @Override
-    public int binarySearch(Bus[] array, Bus target) {
+    public int searchFor(Bus[] array, Bus target) {
         return UtilsToProject.search(array, target);
     }
 

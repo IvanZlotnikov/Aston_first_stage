@@ -4,13 +4,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//дя записи данных в файл
 public class FileWriterUtill {
 
     public void writeToFile(String data, String filePath, boolean append) {
         if (data == null || filePath == null || data.isEmpty() || filePath.isEmpty())
             throw new IllegalArgumentException("data or path is null or empty");
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, append))) {
             bufferedWriter.write(data);
             bufferedWriter.newLine();
         } catch (IOException e) {

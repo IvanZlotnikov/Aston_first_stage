@@ -1,11 +1,12 @@
 package aston.model;
 
-import aston.core.BinarySearchable;
-import aston.core.Sortable;
 import aston.utils.UtilsToProject;
+import aston.strategy.SearchStrategy;
+import aston.strategy.SortStrategy;
+import aston.strategy.Evenness;
 
-
-public class Student implements Comparable<Student>, Sortable<Student>, BinarySearchable<Student> {
+// представление студента
+public class Student implements Comparable<Student>, SortStrategy<Student>, SearchStrategy<Student>, Evenness {
 
     private final int groupNumber;
     private final double averageGrade;
@@ -31,12 +32,10 @@ public class Student implements Comparable<Student>, Sortable<Student>, BinarySe
 
     @Override
     public String toString() {
-        return "Student{" +
-               "groupNumber=" + groupNumber +
-               ", averageGrade=" + averageGrade +
-               ", recordBookNumber=" + recordBookNumber +
-               '}';
+        return String.format("Студент [Группа: %d | Средний балл: %.2f | Зачётка №%d]",
+                groupNumber, averageGrade, recordBookNumber);
     }
+
 
     @Override
     public int compareTo(Student target) {
@@ -44,9 +43,14 @@ public class Student implements Comparable<Student>, Sortable<Student>, BinarySe
             throw new IllegalArgumentException("target is null");
         return Double.compare(this.averageGrade, target.averageGrade);
     }
+    
+    @Override
+    public boolean isEven() {
+        return ((averageGrade % 2) == 0);
+    }
 
     @Override
-    public int binarySearch(Student[] array, Student target) {
+    public int searchFor(Student[] array, Student target) {
         return UtilsToProject.search(array, target);
     }
 

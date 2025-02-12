@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//для чтения файлов
 public class FileReaderUtill {
     public static String[] readFile(String filePath) {
         String[] lines = new String[100];

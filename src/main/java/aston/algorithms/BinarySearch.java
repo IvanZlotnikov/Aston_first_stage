@@ -1,12 +1,12 @@
 package aston.algorithms;
 
-import aston.core.BinarySearchable;
+import aston.strategy.SearchStrategy;
 
 //для бинарного поиска
-public class BinarySearch<T extends Comparable> implements BinarySearchable<T> {
+public class BinarySearch<T extends Comparable> implements SearchStrategy<T> {
 
     @Override
-    public int binarySearch(T[] array, T target) {
+    public int searchFor(T[] array, T target) {
         if (array == null || target == null)
             throw new IllegalArgumentException("The given array is null!");
         if (array.length == 0)

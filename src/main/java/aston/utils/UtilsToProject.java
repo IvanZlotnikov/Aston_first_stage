@@ -1,6 +1,7 @@
 package aston.utils;
 import java.util.Arrays;
 
+//утил для сортировки и поиска
 public class UtilsToProject {
     public static <T extends Comparable<T>> void sort(T[] array) {
         if (array == null)

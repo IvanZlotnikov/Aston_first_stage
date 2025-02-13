@@ -24,7 +24,11 @@
 	 			Ответственный
 	 1.Злотников Иван
 				Команда
-		1.
+		1. Константин Макаренко:
+		Разработка классов с паттерном Builder:
+		Класс Bus (number, model, mileage)
+		Класс User (name, password, email) 
+		Класс Student (groupNumber, averageScore, recordBookNumber)
 		2.
 		3.
 		4.

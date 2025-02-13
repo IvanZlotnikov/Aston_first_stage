@@ -1,8 +1,8 @@
 package aston.utill;
 
-import com.aston.entity.Bus;
-import com.aston.entity.Student;
-import com.aston.entity.User;
+import aston.entity.Bus;
+import aston.entity.Student;
+import aston.entity.User;
 
 import java.util.Scanner;
 

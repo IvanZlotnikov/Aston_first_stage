@@ -1,15 +1,14 @@
 package aston.main;
-
-import com.aston.algoritms.BinarySearch;
-import com.aston.algoritms.CustomSort;
-import com.aston.algoritms.SelectionSort;
-import com.aston.entity.Bus;
-import com.aston.entity.Student;
-import com.aston.entity.User;
-import com.aston.utill.FileDataLoader;
-import com.aston.utill.FileWriterUtil;
-import com.aston.utill.InputHandler;
-import com.aston.utill.RandomDataGenerator;
+import aston.algoritms.BinarySearch;
+import aston.algoritms.CustomSort;
+import aston.algoritms.SelectionSort;
+import aston.entity.Bus;
+import aston.entity.Student;
+import aston.entity.User;
+import aston.utill.FileDataLoader;
+import aston.utill.FileWriterUtil;
+import aston.utill.InputHandler;
+import aston.utill.RandomDataGenerator;
 
 import java.util.Scanner;
 

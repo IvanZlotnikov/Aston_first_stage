@@ -31,5 +31,10 @@
 		Класс Student (groupNumber, averageScore, recordBookNumber)
 		2. Тимур Азизов:
   		Разработка классов сотировки SelectionSort и CustomSort, и класса поиска BinarySearch
-		3.
+		3.  Корягин Степан:
+        Разработка интерфейсов:
+        SortStrategy: (интерфейс для сортировки)
+        SearchStrategy: (интерфейс для бинарного поиска)
+        DataFillerStrategy: (интерфейс для заполнения даннных)
+        Разработка класса main()
 		4.

@@ -29,6 +29,8 @@
 		Класс Bus (number, model, mileage)
 		Класс User (name, password, email) 
 		Класс Student (groupNumber, averageScore, recordBookNumber)
-		2.
+		2. Тимур Азизов:
+  		Разработка интерфейса и классов сотировки SortStrategy, SelectionSort и EvenSelectionSort, 
+    		и интерфейса и класса поиска SearchStrategy и BinarySearch
 		3.
 		4.

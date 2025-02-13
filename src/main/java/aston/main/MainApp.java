@@ -1,4 +1,5 @@
 package aston.main;
+
 import aston.algoritms.BinarySearch;
 import aston.algoritms.CustomSort;
 import aston.algoritms.SelectionSort;
@@ -54,6 +55,7 @@ public class MainApp {
             showDataTypeMenu();
             int typeChoice = scanner.nextInt();
             scanner.nextLine();
+            if (typeChoice == 4) return;
             if (typeChoice >= 1 && typeChoice <= 3) {
                 int size = getSizeFromUser();
                 switch (choice) {
@@ -65,9 +67,6 @@ public class MainApp {
                         break;
                     case 3:
                         handleManualChoice(typeChoice, size);
-                        break;
-                    case 4:
-                        System.exit(0);
                         break;
                     default:
                         System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
@@ -90,6 +89,7 @@ public class MainApp {
         System.out.println("1. Автобусы");
         System.out.println("2. Студенты");
         System.out.println("3. Пользователи");
+        System.out.println("4. Выход");
     }
 
     private static int getSizeFromUser() {
@@ -199,6 +199,7 @@ public class MainApp {
             System.out.println("2. Custom Sort");
             int sortChoice = scanner.nextInt();
             scanner.nextLine();
+            if (sortChoice == 3) return;
             if (sortChoice >= 1 && sortChoice <= 2) {
                 switch (typeChoice) {
                     case 1:

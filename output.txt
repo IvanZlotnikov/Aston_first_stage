@@ -1,0 +1,225 @@
+1, ModelA, 10000
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+5, ModelE, 50000
+6, ModelF, 60000
+7, ModelG, 70000
+8, ModelH, 80000
+9, ModelI, 90000
+10, ModelJ, 100000
+11, ModelK, 110000
+12, ModelL, 120000
+13, ModelM, 130000
+14, ModelN, 140000
+15, ModelO, 150000
+
+200, Модель77, 26153
+659, Модель97, 81097
+
+1, asd, 123
+2, rew, 321
+3, hft, 555
+
+330, Модель74, 24608
+690, Модель52, 33282
+754, Модель46, 42163
+921, Модель80, 90715
+925, Модель94, 25174
+
+1, ModelA, 10000
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+5, ModelE, 50000
+6, ModelF, 60000
+7, ModelG, 70000
+8, ModelH, 80000
+9, ModelI, 90000
+10, ModelJ, 100000
+11, ModelK, 110000
+12, ModelL, 120000
+13, ModelM, 130000
+14, ModelN, 140000
+15, ModelO, 150000
+
+1, ModelA, 10000
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+5, ModelE, 50000
+6, ModelF, 60000
+7, ModelG, 70000
+8, ModelH, 80000
+9, ModelI, 90000
+10, ModelJ, 100000
+11, ModelK, 110000
+12, ModelL, 120000
+13, ModelM, 130000
+14, ModelN, 140000
+15, ModelO, 150000
+
+42, Модель61, 72889
+177, Модель54, 96825
+729, Модель18, 41803
+
+2, as, 11
+
+161, Модель75, 48284
+597, Модель98, 86708
+791, Модель13, 92547
+
+2, ModelB, 20000
+15, ModelO, 150000
+
+1, 2.0, 3
+2, 1.0, 5
+
+1, 2.0, 3
+2, 1.0, 5
+фыв, 123, фв
+
+User7, 123, user7@example.com
+User5, 12314, user5@example.com
+User2, 65463, user2@example.com
+
+2, ModelB, 20000
+3, ModelC, 30000
+15, ModelO, 150000
+
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+11, ModelK, 110000
+15, ModelO, 150000
+
+
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+11, ModelK, 110000
+15, ModelO, 150000
+
+27, 6.541183223902175, 175
+74, 4.728220621436481, 900
+78, 5.50205596040373, 784
+
+
+
+2, ModelB, 20000
+3, ModelC, 30000
+15, ModelO, 150000
+
+3, 4.5, 1003
+5, 3.2, 1005
+12, 4.4, 1012
+
+2, ModelB, 20000
+3, ModelC, 30000
+4, ModelD, 40000
+11, ModelK, 110000
+15, ModelO, 150000
+
+2, ModelB, 20000
+3, ModelC, 30000
+15, ModelO, 150000
+
+15, ModelO, 150000
+2, ModelB, 20000
+3, ModelC, 30000
+11, ModelK, 110000
+4, ModelD, 40000
+10, ModelJ, 100000
+5, ModelE, 50000
+6, ModelF, 60000
+13, ModelM, 130000
+7, ModelG, 70000
+
+2, 4.0, 1002
+3, 4.5, 1003
+5, 3.2, 1005
+11, 3.6, 1011
+6, 4.1, 1006
+13, 3.8, 1013
+7, 4.8, 1007
+8, 3.9, 1008
+12, 4.4, 1012
+14, 4.2, 1014
+
+User5, 12314, user5@example.com
+User2, 65463, user2@example.com
+User7, 123, user7@example.com
+User1, 34534, user1@example.com
+User14, 3489573, user14@example.com
+User12, 123, user12@example.com
+User3, 69890, user3@example.com
+User15, 233, user15@example.com
+User9, 35345, user9@example.com
+User4, 345, user4@example.com
+
+User5, 12314, user5@example.com
+User2, 65463, user2@example.com
+User7, 123, user7@example.com
+User1, 34534, user1@example.com
+User14, 3489573, user14@example.com
+User12, 123, user12@example.com
+User3, 69890, user3@example.com
+User15, 233, user15@example.com
+User9, 35345, user9@example.com
+User4, 345, user4@example.com
+
+User7, 123, user7@example.com
+User2, 65463, user2@example.com
+User5, 12314, user5@example.com
+User1, 34534, user1@example.com
+User9, 35345, user9@example.com
+User12, 123, user12@example.com
+User3, 69890, user3@example.com
+User15, 233, user15@example.com
+User14, 3489573, user14@example.com
+User4, 345, user4@example.com
+
+User7, 123, user7@example.com
+User2, 65463, user2@example.com
+User5, 12314, user5@example.com
+User1, 34534, user1@example.com
+User9, 35345, user9@example.com
+User12, 123, user12@example.com
+User3, 69890, user3@example.com
+User15, 233, user15@example.com
+User14, 3489573, user14@example.com
+User4, 345, user4@example.com
+
+User7, 123, user7@example.com
+User12, 123, user12@example.com
+User15, 233, user15@example.com
+User4, 345, user4@example.com
+User5, 12314, user5@example.com
+User1, 34534, user1@example.com
+User9, 35345, user9@example.com
+User2, 65463, user2@example.com
+User3, 69890, user3@example.com
+User14, 3489573, user14@example.com
+
+User7, 123, user7@example.com
+User2, 65463, user2@example.com
+User5, 12314, user5@example.com
+User1, 34534, user1@example.com
+User9, 35345, user9@example.com
+User12, 123, user12@example.com
+User3, 69890, user3@example.com
+User15, 233, user15@example.com
+User14, 3489573, user14@example.com
+User4, 345, user4@example.com
+
+User7, 123, user7@example.com
+User12, 123, user12@example.com
+User15, 233, user15@example.com
+User4, 345, user4@example.com
+User5, 12314, user5@example.com
+User1, 34534, user1@example.com
+User9, 35345, user9@example.com
+User2, 65463, user2@example.com
+User3, 69890, user3@example.com
+User14, 3489573, user14@example.com
+

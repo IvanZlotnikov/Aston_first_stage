@@ -107,7 +107,7 @@ public class MainApp {
     private static void chooseSortMethod(int typeChoice) {
         while (true) {
             System.out.println("Выберите метод сортировки:");
-            System.out.println("1. Selection Sort");
+            System.out.println("1. Selection Sort(только для числовых полей)");
             System.out.println("2. Custom Sort");
             int sortChoice = scanner.nextInt();
             scanner.nextLine();

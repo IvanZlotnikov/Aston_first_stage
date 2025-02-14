@@ -30,41 +30,6 @@ public class DataManager {
         }
     }
 
-
-//    public static void handleRandomChoice(int typeChoice, int size) {
-//        switch (typeChoice) {
-//            case 1:
-//                buses = RandomDataGenerator.generateRandomBuses(size);
-//                break;
-//            case 2:
-//                students = RandomDataGenerator.generateRandomStudents(size);
-//                break;
-//            case 3:
-//                users = RandomDataGenerator.generateRandomUsers(size);
-//                break;
-//            default:
-//                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-//                break;
-//        }
-//    }
-
-//    public static void handleManualChoice(int typeChoice, int size) {
-//        switch (typeChoice) {
-//            case 1:
-//                buses = InputHandler.inputBusesManually(size);
-//                break;
-//            case 2:
-//                students = InputHandler.inputStudentsManually(size);
-//                break;
-//            case 3:
-//                users = InputHandler.inputUsersManually(size);
-//                break;
-//            default:
-//                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-//                break;
-//        }
-//    }
-
     public static Bus[] getBuses() {
         return buses;
     }

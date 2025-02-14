@@ -6,6 +6,7 @@ import aston.entity.User;
 
 import java.util.Random;
 
+//Генерация случайных данных.
 public class RandomDataGenerator {
 
     public static Bus[] generateRandomBuses(int size) {
@@ -15,7 +16,7 @@ public class RandomDataGenerator {
             int number = random.nextInt(1000) + 1; // Генерация случайного номера
             String model = "Модель" + (random.nextInt(100) + 1); // Генерация случайной модели
             int mileage = random.nextInt(100000); // Генерация случайного пробега
-            if (validateBusData(number, model, mileage)) {
+            if (DataValidator.validateBusData(number, model, mileage)) {
                 buses[i] = new Bus.Builder()
                         .setNumber(number)
                         .setModel(model)
@@ -35,7 +36,7 @@ public class RandomDataGenerator {
             int groupNumber = random.nextInt(100) + 1;
             double averageGrade = random.nextDouble() * 10; // Оценка от 0 до 10
             int numberOfRecordBook = random.nextInt(1000) + 1;
-            if (validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
+            if (DataValidator.validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
                 students[i] = new Student.Builder()
                         .setGroupNumber(groupNumber)
                         .setAverageGrade(averageGrade)
@@ -55,7 +56,7 @@ public class RandomDataGenerator {
             String name = "Имя" + (random.nextInt(100) + 1);
             int password = random.nextInt(1000) + 1;
             String email = "email" + (random.nextInt(100) + 1) + "@example.com";
-            if (validateUserData(name, password, email)) {
+            if (DataValidator.validateUserData(name, password, email)) {
                 users[i] = new User.Builder()
                         .setName(name)
                         .setPassword(password)
@@ -66,17 +67,5 @@ public class RandomDataGenerator {
             }
         }
         return users;
-    }
-
-    private static boolean validateBusData(int number, String model, int mileage) {
-        return number > 0 && model != null && !model.isEmpty() && mileage >= 0;
-    }
-
-    private static boolean validateStudentData(int groupNumber, double averageGrade, int numberOfRecordBook) {
-        return groupNumber > 0 && averageGrade >= 0 && numberOfRecordBook > 0;
-    }
-
-    private static boolean validateUserData(String name, int password, String email) {
-        return name != null && !name.isEmpty() && password >=0 && email != null && !email.isEmpty();
     }
 }

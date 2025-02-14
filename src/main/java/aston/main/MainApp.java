@@ -1,24 +1,18 @@
 package aston.main;
 
-import aston.algoritms.BinarySearch;
-import aston.algoritms.CustomSort;
-import aston.algoritms.SelectionSort;
+import aston.handler.MenuHandler;
 import aston.entity.Bus;
 import aston.entity.Student;
 import aston.entity.User;
-import aston.utill.FileDataLoader;
-import aston.utill.FileWriterUtil;
-import aston.utill.InputHandler;
-import aston.utill.RandomDataGenerator;
+import aston.handler.*;
+import aston.input.ManualDataInput;
+import aston.input.RandomDataInput;
 
 import java.util.Scanner;
 
 
 public class MainApp {
-    private static Scanner scanner = new Scanner(System.in);
-    private static Bus[] buses;
-    private static Student[] students;
-    private static User[] users;
+    private static final Scanner scanner = new Scanner(System.in);
 
     private static final String BUSES_FILE_PATH = "buses.txt";
     private static final String USERS_FILE_PATH = "users.txt";
@@ -28,167 +22,85 @@ public class MainApp {
 
     public static void main(String[] args) {
         while (true) {
-            showMainMenu();
-        }
-    }
-
-    private static void showMainMenu() {
-        while (true) {
-            System.out.println("Выберите тип ввода данных:");
-            System.out.println("1. Заполнение массива из файла");
-            System.out.println("2. Генерация случайных данных");
-            System.out.println("3. Ввод данных вручную");
-            System.out.println("4. Выход");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            if (choice >= 1 && choice <= 4) {
-                handleMainChoice(choice);
-                if (choice == 4) break;
-            } else {
-                System.err.println("Неверный выбор.Пожалуйста, попробуйте снова");
+            int choice = MenuHandler.showMainMenu();
+            if (choice == 4) {
+                System.exit(0);
             }
+            handleMainChoice(choice);
         }
     }
 
     private static void handleMainChoice(int choice) {
-        while (true) {
-            showDataTypeMenu();
-            int typeChoice = scanner.nextInt();
-            scanner.nextLine();
-            if (typeChoice == 4) return;
-            if (typeChoice >= 1 && typeChoice <= 3) {
-                int size = getSizeFromUser();
-                switch (choice) {
-                    case 1:
-                        handleFileChoice(typeChoice, size);
-                        break;
-                    case 2:
-                        handleRandomChoice(typeChoice, size);
-                        break;
-                    case 3:
-                        handleManualChoice(typeChoice, size);
-                        break;
-                    default:
-                        System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-                        continue;
-                }
-                displayList(typeChoice); //вывод на экран списка
-                chooseSortMethod(typeChoice); // выбор сортировки
-                displaySortedElements(typeChoice); // отсортированный список на экран
-                performSearch(typeChoice);// поиск элемента
-                writeToFile(); // запись в файл
-                break;
-            } else {
-                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
+        int typeChoice = MenuHandler.showDataTypeMenu();
+        if (typeChoice == 4) {
+            System.exit(0);
+        }
+        if (typeChoice >= 1 && typeChoice <= 4) {
+            int size = MenuHandler.getSizeFromUser();
+            Bus[] buses = null;
+            Student[] students = null;
+            User[] users = null;
+            InputManager<Bus> busInputManager = new InputManager<>();
+            InputManager<Student> studentInputManager = new InputManager<>();
+            InputManager<User> userInputManager = new InputManager<>();
+
+            switch (choice) {
+                case 1:
+                    DataManager.handleFileChoice(typeChoice, size, BUSES_FILE_PATH, STUDENTS_FILE_PATH, USERS_FILE_PATH);
+                    break;
+                case 2:
+                    switch (typeChoice) {
+                        case 1:
+                            buses = busInputManager.inputData(new RandomDataInput<>(Bus.class), size);
+                            DataManager.setBuses(buses);
+                            break;
+                        case 2:
+                            students = studentInputManager.inputData(new RandomDataInput<>(Student.class), size);
+                            DataManager.setStudents(students);
+                            break;
+                        case 3:
+                            users = userInputManager.inputData(new RandomDataInput<>(User.class), size);
+                            DataManager.setUsers(users);
+                            break;
+                        default:
+                            System.err.println("Неверный выбор.");
+                            break;
+                    }
+                    break;
+                case 3:
+                    switch (typeChoice) {
+                        case 1:
+                            buses = busInputManager.inputData(new ManualDataInput<>(Bus.class), size);
+                            DataManager.setBuses(buses);
+                            break;
+                        case 2:
+                            students = studentInputManager.inputData(new ManualDataInput<>(Student.class), size);
+                            DataManager.setStudents(students);
+                            break;
+                        case 3:
+                            users = userInputManager.inputData(new ManualDataInput<>(User.class), size);
+                            DataManager.setUsers(users);
+                            break;
+                        default:
+                            System.err.println("Неверный выбор.");
+                            break;
+                    }
+                    break;
+                default:
+                    System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
+                    return;
             }
-        }
-    }
 
-    private static void showDataTypeMenu() {
-        System.out.println("Выберите тип данных для заполнения:");
-        System.out.println("1. Автобусы");
-        System.out.println("2. Студенты");
-        System.out.println("3. Пользователи");
-        System.out.println("4. Выход");
-    }
-
-    private static int getSizeFromUser() {
-        System.out.println("Введите количество элементов:");
-        return scanner.nextInt();
-    }
-
-    private static void handleFileChoice(int typeChoice, int size) {
-        switch (typeChoice) {
-            case 1:
-                buses = FileDataLoader.loadBusesFromFile(BUSES_FILE_PATH, size);
-                break;
-            case 2:
-                students = FileDataLoader.loadStudentsFromFile(STUDENTS_FILE_PATH, size);
-                break;
-            case 3:
-                users = FileDataLoader.loadUsersFromFile(USERS_FILE_PATH, size);
-                break;
-            default:
-                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-                break;
-        }
-    }
-
-    private static void handleRandomChoice(int typeChoice, int size) {
-        switch (typeChoice) {
-            case 1:
-                buses = RandomDataGenerator.generateRandomBuses(size);
-                break;
-            case 2:
-                students = RandomDataGenerator.generateRandomStudents(size);
-                break;
-            case 3:
-                users = RandomDataGenerator.generateRandomUsers(size);
-                break;
-            default:
-                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-                break;
-        }
-    }
-
-    private static void handleManualChoice(int typeChoice, int size) {
-        switch (typeChoice) {
-            case 1:
-                buses = InputHandler.inputBusesManually(size);
-                break;
-            case 2:
-                students = InputHandler.inputStudentsManually(size);
-                break;
-            case 3:
-                users = InputHandler.inputUsersManually(size);
-                break;
-            default:
-                System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
-                break;
-        }
-    }
-
-    private static void displayList(int typeChoice) {
-        switch (typeChoice) {
-            case 1:
-                System.out.println("Список автобусов:");
-                if (buses != null) {
-                    for (Bus bus : buses) {
-                        System.out.println("Номер: " + bus.getNumber() +
-                                           ", Модель: " + bus.getModel() +
-                                           ", Пробеег: " + bus.getMileage());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            case 2:
-                System.out.println("Список студентов:");
-                if (students != null) {
-                    for (Student student : students) {
-                        System.out.println("Номер группы: " + student.getGroupNumber() +
-                                           ", Средний балл: " + student.getAverageGrade() +
-                                           ", Номер зачетной книжки: " + student.getNumberOfRecordBook());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            case 3:
-                System.out.println("Список пользователей:");
-                if (users != null) {
-                    for (User user : users) {
-                        System.out.println("Имя пользователя: " + user.getName() +
-                                           ", Пароль: " + user.getPassword() +
-                                           ", Почта: " + user.getEmail());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            default:
-                System.err.println("Неверный выбор.");
-                break;
+            buses = DataManager.getBuses();
+            students = DataManager.getStudents();
+            users = DataManager.getUsers();
+            DisplayHandler.displayList(typeChoice, buses, students, users);
+            chooseSortMethod(typeChoice);
+            DisplayHandler.displaySortedElements(typeChoice, buses, students, users);
+            performSearch(typeChoice);
+            writeToFile();
+        } else {
+            System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
         }
     }
 
@@ -199,40 +111,30 @@ public class MainApp {
             System.out.println("2. Custom Sort");
             int sortChoice = scanner.nextInt();
             scanner.nextLine();
-            if (sortChoice == 3) return;
+
             if (sortChoice >= 1 && sortChoice <= 2) {
-                switch (typeChoice) {
-                    case 1:
-                        if (buses != null) {
-                            if (sortChoice == 1) {
-                                SelectionSort.sort(buses);
-                            } else {
-                                CustomSort.sort(buses, Bus::getNumber);
-                            }
-                        }
-                        break;
-                    case 2:
-                        if (students != null) {
-                            if (sortChoice == 1) {
-                                SelectionSort.sort(students);
-                            } else {
-                                CustomSort.sort(students, Student::getGroupNumber);
-                            }
-                        }
-                        break;
-                    case 3:
-                        if (users != null) {
-                            if (sortChoice == 1) {
-                                SelectionSort.sort(users);
-                            } else {
-                                CustomSort.sort(users, User::getPassword);
-                            }
-                        }
-                        break;
-                    default:
-                        System.err.println("Неверный выбор.");
-                        break;
+                System.out.println("Выберите поле для сортировки:");
+                if (typeChoice == 1) {
+                    System.out.println("1. Номер");
+                    System.out.println("2. Модель");
+                    System.out.println("3. Пробег");
+                } else if (typeChoice == 2) {
+                    System.out.println("1. Номер группы");
+                    System.out.println("2. Средний бал");
+                    System.out.println("3. Номер зачетной книжки");
                 }
+                if (typeChoice == 3) {
+                    System.out.println("1. Имя");
+                    System.out.println("2. Пароль");
+                    System.out.println("3. Почта");
+                }
+                int fieldChoice = scanner.nextInt();
+                scanner.nextLine();
+
+                Bus[] buses = DataManager.getBuses();
+                Student[] students = DataManager.getStudents();
+                User[] users = DataManager.getUsers();
+                SortAndSearchHandler.sort(typeChoice, sortChoice, fieldChoice, buses, students, users);
                 break;
             } else {
                 System.err.println("Неверный выбор. Пожалуйста, попробуйте снова.");
@@ -240,53 +142,10 @@ public class MainApp {
         }
     }
 
-    private static void displaySortedElements(int typeChoice) {
-        switch (typeChoice) {
-            case 1:
-                System.out.println("Отсортированный список автобусов:");
-                if (buses != null) {
-                    for (Bus bus : buses) {
-                        System.out.println("Номер: " + bus.getNumber() +
-                                           ", Модель: " + bus.getModel() +
-                                           ", Пробег: " + bus.getMileage());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            case 2:
-                System.out.println("Отсортированный список студентов:");
-                if (students != null) {
-                    for (Student student : students) {
-                        System.out.println("Номер группы: " + student.getGroupNumber() +
-                                           ", Средний балл: " + student.getAverageGrade() +
-                                           ", Номер зачетной книжки: " + student.getNumberOfRecordBook());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            case 3:
-                System.out.println("Отсортированный список пользователей:");
-                if (users != null) {
-                    for (User user : users) {
-                        System.out.println("Имя: " + user.getName() +
-                                           ", Пароль: " + user.getPassword() +
-                                           ", Почта: " + user.getEmail());
-                    }
-                } else {
-                    System.out.println("Список пуст.");
-                }
-                break;
-            default:
-                System.err.println("Неверный выбор.");
-                break;
-        }
-    }
-
     private static void performSearch(int typeChoice) {
         switch (typeChoice) {
             case 1:
+                Bus[] buses = DataManager.getBuses();
                 if (buses != null) {
                     System.out.println("Введите номер автобуса для поиска:");
                     int number = scanner.nextInt();
@@ -294,7 +153,7 @@ public class MainApp {
                     Bus key = new Bus.Builder()
                             .setNumber(number)
                             .build();
-                    int index = BinarySearch.binarySearch(buses, key);
+                    int index = SortAndSearchHandler.search(typeChoice, buses, null, null, key);
                     if (index >= 0) {
                         System.out.println("Автобус найден на позиции: " + index);
                         writeFoundElementToFile(buses[index]);
@@ -304,7 +163,7 @@ public class MainApp {
                 }
                 break;
             case 2:
-                // Аналогичный блок для студентов
+                Student[] students = DataManager.getStudents();
                 if (students != null) {
                     System.out.println("Введите номер группы студента для поиска:");
                     int groupNumber = scanner.nextInt();
@@ -312,7 +171,7 @@ public class MainApp {
                     Student key = new Student.Builder()
                             .setGroupNumber(groupNumber)
                             .build();
-                    int index = BinarySearch.binarySearch(students, key);
+                    int index = SortAndSearchHandler.search(typeChoice, null, students, null, key);
                     if (index >= 0) {
                         System.out.println("Студент найден на позиции: " + index);
                         writeFoundElementToFile(students[index]);
@@ -322,7 +181,7 @@ public class MainApp {
                 }
                 break;
             case 3:
-                // Аналогичный блок для пользователей
+                User[] users = DataManager.getUsers();
                 if (users != null) {
                     System.out.println("Введите пароль пользователя для поиска:");
                     int password = scanner.nextInt();
@@ -330,12 +189,12 @@ public class MainApp {
                     User key = new User.Builder()
                             .setPassword(password)
                             .build();
-                    int index = BinarySearch.binarySearch(users, key);
+                    int index = SortAndSearchHandler.search(typeChoice, null, null, users, key);
                     if (index >= 0) {
                         System.out.println("Пользователь найден на позиции: " + index);
                         writeFoundElementToFile(users[index]);
                     } else {
-                        System.out.println("Пользователь не найден.");
+                        System.err.println("Пользователь не найден.");
                     }
                 }
                 break;
@@ -345,50 +204,38 @@ public class MainApp {
         }
     }
 
-    private static void writeFoundElementToFile
-            (Object element) {
-        StringBuilder data = new StringBuilder();
-        if (element instanceof Bus) {
-            Bus bus = (Bus) element;
-            data.append("Номер: ").append(bus.getNumber()).append(", Модель: ").append(bus.getModel()).append(", Пробег: ").append(bus.getMileage()).append("\n");
-        } else if (element instanceof Student) {
-            Student student = (Student) element;
-            data.append("Номер группы: ").append(student.getGroupNumber()).append(", Средний балл: ").append(student.getAverageGrade()).append(", Номер зачетной книжки: ").append(student.getNumberOfRecordBook()).append("\n");
-        } else if (element instanceof User) {
-            User user = (User) element;
-            data.append("Имя: ").append(user.getName()).append(", Пароль: ").append(user.getPassword()).append(", Почта: ").append(user.getEmail()).append("\n");
-        }
-        FileWriterUtil.writeToFile(FOUND_ELEMENT_FILE_PATH, data.toString());
-        System.out.println("Найденный элемент записан в файл.");
+    private static void writeFoundElementToFile(Object element) {
+        String data = FileManager.buildDataString(element);
+        FileManager.writeToFile(data, FOUND_ELEMENT_FILE_PATH);
+        System.out.println("Найденный элемент записан в файл: " + FOUND_ELEMENT_FILE_PATH);
     }
 
     private static void writeToFile() {
         StringBuilder data = new StringBuilder();
+
+        Bus[] buses = DataManager.getBuses();
         if (buses != null) {
             for (Bus bus : buses) {
-                data.append(bus.getNumber()).append(", ")
-                        .append(bus.getModel()).append(", ")
-                        .append(bus.getMileage()).append("\n");
+                data.append(FileManager.buildDataString(bus));
             }
         }
+
+        Student[] students = DataManager.getStudents();
         if (students != null) {
             for (Student student : students) {
-                data.append(student.getGroupNumber()).append(", ")
-                        .append(student.getAverageGrade()).append(", ")
-                        .append(student.getNumberOfRecordBook()).append("\n");
+                data.append(FileManager.buildDataString(student));
             }
         }
+
+        User[] users = DataManager.getUsers();
         if (users != null) {
             for (User user : users) {
-                data.append(user.getName()).append(", ")
-                        .append(user.getPassword()).append(", ")
-                        .append(user.getEmail()).append("\n");
+                data.append(FileManager.buildDataString(user));
             }
         }
-        FileWriterUtil.writeToFile(OUTPUT_FILE_PATH, data.toString());
-        System.out.println("Данные записаны в файл.");
 
-//        scanner.close();
+        FileManager.writeToFile(data.toString(), OUTPUT_FILE_PATH);
+        System.out.println("Данные записаны в файл: " + OUTPUT_FILE_PATH);
     }
 }
 

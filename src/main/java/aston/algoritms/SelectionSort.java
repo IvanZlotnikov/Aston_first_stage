@@ -1,5 +1,6 @@
 package aston.algoritms;
 
+
 //Класс для выполнения сортировки методом выбора.
 public class SelectionSort {
     public static <T extends Comparable<T>> void sort(T[] array) {

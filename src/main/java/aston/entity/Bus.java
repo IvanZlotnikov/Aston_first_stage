@@ -6,9 +6,9 @@ public class Bus implements Comparable<Bus>{
         return Integer.compare(this.number, target.number);
     }
 
-    private int number;
-    private String model;
-    private int mileage;
+    private final int number;
+    private final String model;
+    private final int mileage;
 
     private Bus(Builder builder) {
         this.number = builder.number;
@@ -16,7 +16,7 @@ public class Bus implements Comparable<Bus>{
         this.mileage = builder.mileage;
     }
 
-    public int getNumber() {
+    public  int getNumber() {
         return number;
     }
 

@@ -7,11 +7,10 @@ import aston.entity.Bus;
 import aston.entity.Student;
 import aston.entity.User;
 
+
 //Сортировка и поиск элементов.
 public class SortAndSearchHandler {
-
     public static void sort(int typeChoice, int sortChoice, int fieldChoice, Bus[] buses, Student[] students, User[] users) {
-
         switch (typeChoice) {
             case 1:
                 if (buses == null) return;

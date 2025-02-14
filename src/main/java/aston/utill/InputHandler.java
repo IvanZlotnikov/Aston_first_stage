@@ -42,30 +42,30 @@ public class InputHandler {
         return buses;
     }
 
-    public static User[] inputUsersManually(int size) {
-        User[] users = new User[size];
-        for (int i = 0; i < size; i++) {
-            System.out.println("Введите данные для пользователя " + (i + 1));
-            System.out.print("Имя: ");
-            String name = scanner.nextLine();
-
-            System.out.print("Пароль(числовой): ");
-            int password = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Почта: ");
-            String email = scanner.nextLine();
-
-            if (DataValidator.validateUserData(name, password, email)) {
-                users[i] = new User.Builder()
-                        .setName(name)
-                        .setPassword(password)
-                        .setEmail(email)
-                        .build();
-            } else {
-                System.err.println("Некорректные данные, попробуйте снова.");
-                i--; // повторите ввод для тек пользователя
+    public static User[] inputUsersManually(int count) {
+        User[] users = new User[count];
+        for (int i = 0; i < count; i++) {
+            System.out.println("Введите имя пользователя: ");
+            String name = scanner.next();
+            System.out.println("Введите пароль пользователя: ");
+            String password = scanner.next();
+            String email;
+            boolean b = false;
+            System.out.println("Введите свою електронную почту: ");
+            do {
+                email = scanner.nextLine();
+                String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+                b = email.matches(email_regex);
+            } while (!b);
+            {
+                System.out.println("почта валидна !!!");
             }
+            users[i] = new User.Builder()
+                    .setName(name)
+                    .setPassword(Integer.parseInt(password))
+                    .setEmail(email)
+                    .build();
         }
         return users;
     }

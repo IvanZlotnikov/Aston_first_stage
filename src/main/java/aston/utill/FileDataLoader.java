@@ -9,12 +9,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
+//Загрузка данных из файлов в массивы объектов.
 public class FileDataLoader {
 
     public static Bus[] loadBusesFromFile(String filePath, int size) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int count = 0;
+            // Сначала посчитаем количество строк в файле для создания массива нужного размера
             while ((line = br.readLine()) != null && count < size) {
                 count++;
             }
@@ -29,7 +31,7 @@ public class FileDataLoader {
                     int number = Integer.parseInt(data[0].trim());
                     String model = data[1].trim();
                     int mileage = Integer.parseInt(data[2].trim());
-                    if (validateBusData(number, model, mileage)) {
+                    if (DataValidator.validateBusData(number, model, mileage)) {
                         buses[index++] = new Bus.Builder()
                                 .setNumber(number)
                                 .setModel(model)
@@ -64,7 +66,7 @@ public class FileDataLoader {
                     int groupNumber = Integer.parseInt(data[0].trim());
                     double averageGrade = Double.parseDouble(data[1].trim());
                     int numberOfRecordBook = Integer.parseInt(data[2].trim());
-                    if (validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
+                    if (DataValidator.validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
                         students[index++] = new Student.Builder()
                                 .setGroupNumber(groupNumber)
                                 .setAverageGrade(averageGrade)
@@ -99,7 +101,7 @@ public class FileDataLoader {
                     String name = data[0].trim();
                     int password = Integer.parseInt(data[1].trim());
                     String email = data[2].trim();
-                    if (validateUserData(name, password, email)) {
+                    if (DataValidator.validateUserData(name, password, email)) {
                         users[index++] = new User.Builder()
                                 .setName(name)
                                 .setPassword(password)
@@ -114,17 +116,4 @@ public class FileDataLoader {
         }
         return new User[0]; // Возвращаем пустой массив в случае ошибки
     }
-
-    private static boolean validateBusData(int number, String model, int mileage) {
-        return number > 0 && model != null && !model.isEmpty() && mileage >= 0;
-    }
-
-    private static boolean validateStudentData(int groupNumber, double averageGrade, int numberOfRecordBook) {
-        return groupNumber > 0 && averageGrade >= 0 && numberOfRecordBook > 0;
-    }
-
-    private static boolean validateUserData(String name, int password, String email) {
-        return name != null && !name.isEmpty() && password >= 0 && email != null && !email.isEmpty();
-    }
-
 }

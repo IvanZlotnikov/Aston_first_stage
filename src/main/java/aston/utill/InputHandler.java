@@ -6,6 +6,7 @@ import aston.entity.User;
 
 import java.util.Scanner;
 
+//Ручной ввод данных через консоль.
 public class InputHandler {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -15,23 +16,23 @@ public class InputHandler {
             System.out.println("Введите данные для автобуса " + (i + 1));
             System.out.print("Номер: ");
             int number = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine(); // переход на новую строку
 
             System.out.print("Модель: ");
             String model = scanner.nextLine();
 
             System.out.print("Пробег: ");
             int mileage = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine();// переход на новую строку
 
-            if (validateBusData(number, model, mileage)) {
+            if (DataValidator.validateBusData(number, model, mileage)) {
                 buses[i] = new Bus.Builder()
                         .setNumber(number)
                         .setModel(model)
                         .setMileage(mileage)
                         .build();
             } else {
-                System.out.println("Некорректные данные. попробуй снова.");
+                System.err.println("Некорректные данные. попробуй снова.");
                 i--;
             }
         }
@@ -52,14 +53,14 @@ public class InputHandler {
             System.out.print("Почта: ");
             String email = scanner.nextLine();
 
-            if (validateUserData(name, password, email)) {
+            if (DataValidator.validateUserData(name, password, email)) {
                 users[i] = new User.Builder()
                         .setName(name)
                         .setPassword(password)
                         .setEmail(email)
                         .build();
             } else {
-                System.out.println("Некорректные данные, попробуйте снова.");
+                System.err.println("Некорректные данные, попробуйте снова.");
                 i--; // повторите ввод для тек пользователя
             }
         }
@@ -72,40 +73,27 @@ public class InputHandler {
             System.out.println("Введите данные для студента " + (i + 1));
             System.out.print("Номер группы: ");
             int groupNumber = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine();
 
             System.out.print("Средний балл: ");
             double averageGrade = scanner.nextDouble();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine();
 
             System.out.print("Номер зачетной книжки: ");
             int numberOfRecordBook = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine();
 
-            if (validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
+            if (DataValidator.validateStudentData(groupNumber, averageGrade, numberOfRecordBook)) {
                 students[i] = new Student.Builder()
                         .setGroupNumber(groupNumber)
                         .setAverageGrade(averageGrade)
                         .setNumberOfRecordBook(numberOfRecordBook)
                         .build();
-            }else{
-                System.out.println("Некорректные данные, попробуйте снова.");
+            } else {
+                System.err.println("Некорректные данные, попробуйте снова.");
                 i--; // повторите ввод для тек студента
             }
         }
         return students;
     }
-
-    private static boolean validateBusData(int number, String model, int mileage) {
-        return number > 0 && model != null && !model.isEmpty() && mileage >= 0;
-    }
-
-    private static boolean validateUserData(String name, int password, String email) {
-        return name != null && !name.isEmpty() && password >= 0  && email != null && !email.isEmpty();
-    }
-
-    private static boolean validateStudentData(int groupNumber, double averageGrade, int numberOfRecordBook) {
-        return groupNumber > 0 && averageGrade >= 0 && numberOfRecordBook > 0;
-    }
-
 }

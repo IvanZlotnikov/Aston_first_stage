@@ -14,8 +14,9 @@ public class DisplayHandler {
                 if (buses == null) {
                     System.out.println("Список автобусов пуст.");
                 } else {
-                    for (Bus bus : buses) {
-                        System.out.println(FileManager.buildDataString(bus));
+                    System.out.println("Список автобусов:");
+                    for (int i = 0; i < buses.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(buses[i]));
                     }
                 }
                 break;
@@ -23,8 +24,9 @@ public class DisplayHandler {
                 if (students == null) {
                     System.out.println("Список студентов пуст.");
                 } else {
-                    for (Student student : students) {
-                        System.out.println(FileManager.buildDataString(student));
+                    System.out.println("Список студентов:");
+                    for (int i = 0; i < students.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(students[i]));
                     }
                 }
                 break;
@@ -32,8 +34,9 @@ public class DisplayHandler {
                 if (users == null) {
                     System.out.println("Список пользователей пуст.");
                 } else {
-                    for (User user : users) {
-                        System.out.println(FileManager.buildDataString(user));
+                    System.out.println("Список пользователей:");
+                    for (int i = 0; i < users.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(users[i]));
                     }
                 }
                 break;
@@ -47,8 +50,8 @@ public class DisplayHandler {
                     System.out.println("Список автобусов пуст.");
                 } else {
                     System.out.println("Отсортированный список автобусов:");
-                    for (Bus bus : buses) {
-                        System.out.println(FileManager.buildDataString(bus));
+                    for (int i = 0; i < buses.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(buses[i]));
                     }
                 }
                 break;
@@ -57,8 +60,8 @@ public class DisplayHandler {
                     System.out.println("Список студентов пуст.");
                 } else {
                     System.out.println("Отсортированный список студентов:");
-                    for (Student student : students) {
-                        System.out.println(FileManager.buildDataString(student));
+                    for (int i = 0; i < students.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(students[i]));
                     }
                 }
                 break;
@@ -67,8 +70,8 @@ public class DisplayHandler {
                     System.out.println("Список пользователей пуст.");
                 } else {
                     System.out.println("Отсортированный список пользователей:");
-                    for (User user : users) {
-                        System.out.println(FileManager.buildDataString(user));
+                    for (int i = 0; i < users.length; i++) {
+                        System.out.println((i + 1) + ". " + FileManager.buildDataString(users[i]));
                     }
                 }
                 break;

@@ -24,20 +24,20 @@ public class FileManager {
             Bus bus = (Bus) element;
             data.append("Номер: ").append(bus.getNumber())
                     .append(", Модель: ").append(bus.getModel())
-                    .append(", Пробег: ").append(bus.getMileage())
-                    .append("\n");
+                    .append(", Пробег: ").append(bus.getMileage());
+//                    .append("\n");
         } else if (element instanceof Student) {
             Student student = (Student) element;
             data.append("Номер группы: ").append(student.getGroupNumber())
                     .append(", Средний балл: ").append(student.getAverageGrade())
-                    .append(", Номер зачетной книжки: ").append(student.getNumberOfRecordBook())
-                    .append("\n");
+                    .append(", Номер зачетной книжки: ").append(student.getNumberOfRecordBook());
+//                    .append("\n");
         } else if (element instanceof User) {
             User user = (User) element;
             data.append("Имя: ").append(user.getName())
                     .append(", Пароль: ").append(user.getPassword())
-                    .append(", Почта: ").append(user.getEmail())
-                    .append("\n");
+                    .append(", Почта: ").append(user.getEmail());
+//                    .append("\n");
         }
         return data.toString();
     }

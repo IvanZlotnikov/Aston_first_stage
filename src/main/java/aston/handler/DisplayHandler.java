@@ -4,6 +4,8 @@ import aston.entity.Bus;
 import aston.entity.Student;
 import aston.entity.User;
 
+
+//корманный логер
 public class DisplayHandler {
 
     public static void displayList(int typeChoice, Bus[] buses, Student[] students, User[] users) {

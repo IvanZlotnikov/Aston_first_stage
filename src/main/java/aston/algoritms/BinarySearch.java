@@ -1,5 +1,6 @@
 package aston.algoritms;
 
+//для бинарного поиска в отсортированных массивах
 public class BinarySearch {
     public static <T extends Comparable<T>> int binarySearch(T[] array, T key) {
         int low = 0;

@@ -5,6 +5,7 @@ import aston.entity.Student;
 import aston.entity.User;
 import aston.utill.InputHandler;
 
+//для ручного ввода данных пользователем
 public class ManualDataInput<T> implements DataInput<T> {
     private final Class<T> type;
 

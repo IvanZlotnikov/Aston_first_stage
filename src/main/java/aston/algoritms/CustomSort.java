@@ -3,7 +3,7 @@ package aston.algoritms;
 import java.util.Comparator;
 import java.util.function.Function;
 
-//Класс для выполнения пользовательской сортировки.
+//для сортировки массивов по определенному ключу
 public class CustomSort {
     public static <T, U extends Comparable<? super U>> void sort(T[] array, Function<? super T, ? extends U> keyExtractor) {
         Comparator<T> comparator = Comparator.comparing(keyExtractor);

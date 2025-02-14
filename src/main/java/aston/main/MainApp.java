@@ -10,7 +10,7 @@ import aston.input.RandomDataInput;
 
 import java.util.Scanner;
 
-
+// главное событие...
 public class MainApp {
     private static final Scanner scanner = new Scanner(System.in);
 

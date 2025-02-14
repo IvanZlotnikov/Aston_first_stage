@@ -5,6 +5,7 @@ import aston.entity.Student;
 import aston.entity.User;
 import aston.utill.RandomDataGenerator;
 
+//для генерации случайных данных
 public class RandomDataInput<T> implements DataInput<T> {
     private final Class<T> type;
 

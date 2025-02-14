@@ -10,31 +10,34 @@ import java.util.Scanner;
 public class InputHandler {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Bus[] inputBusesManually(int size) {
-        Bus[] buses = new Bus[size];
-        for (int i = 0; i < size; i++) {
-            System.out.println("Введите данные для автобуса " + (i + 1));
-            System.out.print("Номер: ");
-            int number = scanner.nextInt();
-            scanner.nextLine(); // переход на новую строку
+    public static Bus[] inputBusesManually(int count) {
+        Bus[] buses = new Bus[count];
+        for (int i = 0; i < count; i++) {
 
-            System.out.print("Модель: ");
-            String model = scanner.nextLine();
+            int number;
+            do {System.out.println("введите номер автобуса: ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не номер!!!");
+                    scanner.next();
+                }
+                number=scanner.nextInt();
+            }while (number<=0);;
+            System.out.println("Введите модель автобуса: ");
+            String model = scanner.next();
+            int mileage;
+            do {System.out.println("введите пробег автобуса ");
+                while (!scanner.hasNextInt()){
+                    System.out.println("Это не пробег!!!");
+                    scanner.next();
+                }
+                mileage=scanner.nextInt();
+            }while (mileage<=0);;
 
-            System.out.print("Пробег: ");
-            int mileage = scanner.nextInt();
-            scanner.nextLine();// переход на новую строку
-
-            if (DataValidator.validateBusData(number, model, mileage)) {
-                buses[i] = new Bus.Builder()
-                        .setNumber(number)
-                        .setModel(model)
-                        .setMileage(mileage)
-                        .build();
-            } else {
-                System.err.println("Некорректные данные. попробуй снова.");
-                i--;
-            }
+            buses[i] = new Bus.Builder()
+                    .setNumber(number)
+                    .setModel(model)
+                    .setMileage(mileage)
+                    .build();
         }
         return buses;
     }

@@ -100,6 +100,6 @@ public class SortAndSearchHandler {
                 System.err.println("Неверный выбор");
                 break;
         }
-        return index;
+        return index != -1 ? index + 1 : index;
     }
 }
